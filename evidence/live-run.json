@@ -1,0 +1,179 @@
+{
+  "dataset_warnings": {
+    "requests_without_candidates": [
+      "RQ-0308-018"
+    ],
+    "orphan_candidate_request_ids": [
+      "RQ-0309-018"
+    ],
+    "candidate_counts": {
+      "RQ-0303-001": 4,
+      "RQ-0303-002": 4,
+      "RQ-0303-003": 4,
+      "RQ-0304-004": 4,
+      "RQ-0304-005": 4,
+      "RQ-0304-006": 4,
+      "RQ-0305-007": 4,
+      "RQ-0305-008": 4,
+      "RQ-0305-009": 4,
+      "RQ-0306-010": 4,
+      "RQ-0306-011": 4,
+      "RQ-0306-012": 4,
+      "RQ-0307-013": 4,
+      "RQ-0307-014": 4,
+      "RQ-0307-015": 4,
+      "RQ-0308-016": 4,
+      "RQ-0308-017": 4,
+      "RQ-0309-018": 4,
+      "RQ-0309-019": 4,
+      "RQ-0309-020": 4
+    },
+    "policy": "Exact request_id join only; unmatched source IDs are never silently corrected."
+  },
+  "mode": "live_openrouter",
+  "input_sha256": {
+    "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+    "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+  },
+  "result": {
+    "request": {
+      "request_id": "RQ-0303-002",
+      "rider_id": "RD-27764",
+      "pickup_coordinates": {
+        "lat": 45.5122,
+        "lon": -122.6283
+      }
+    },
+    "all_candidates": [
+      {
+        "request_id": "RQ-0303-002",
+        "driver_id": "DRV-38214",
+        "status": "offline",
+        "coordinates": {
+          "lat": 45.518,
+          "lon": -122.6721
+        },
+        "straight_line_distance_km": 0.87,
+        "actual_pickup_time_minutes": 14.0,
+        "route_note": "Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+      },
+      {
+        "request_id": "RQ-0303-002",
+        "driver_id": "DRV-52907",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5192,
+          "lon": -122.6738
+        },
+        "straight_line_distance_km": 1.03,
+        "actual_pickup_time_minutes": 16.0,
+        "route_note": "Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+      },
+      {
+        "request_id": "RQ-0303-002",
+        "driver_id": "DRV-16643",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5072,
+          "lon": -122.6569
+        },
+        "straight_line_distance_km": 1.14,
+        "actual_pickup_time_minutes": 4.0,
+        "route_note": "Same bank direct via SE Grand Ave"
+      },
+      {
+        "request_id": "RQ-0303-002",
+        "driver_id": "DRV-29571",
+        "status": "on_trip",
+        "coordinates": {
+          "lat": 45.5288,
+          "lon": -122.6547
+        },
+        "straight_line_distance_km": 1.4,
+        "actual_pickup_time_minutes": 6.0,
+        "route_note": ""
+      }
+    ],
+    "eligible_candidates": [
+      {
+        "request_id": "RQ-0303-002",
+        "driver_id": "DRV-52907",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5192,
+          "lon": -122.6738
+        },
+        "straight_line_distance_km": 1.03,
+        "actual_pickup_time_minutes": 16.0,
+        "route_note": "Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+      },
+      {
+        "request_id": "RQ-0303-002",
+        "driver_id": "DRV-16643",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5072,
+          "lon": -122.6569
+        },
+        "straight_line_distance_km": 1.14,
+        "actual_pickup_time_minutes": 4.0,
+        "route_note": "Same bank direct via SE Grand Ave"
+      }
+    ],
+    "final_match": {
+      "selected_driver_id": "DRV-16643",
+      "estimated_pickup_time_minutes": 4.0,
+      "decision_rationale": "Selected DRV-16643: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+      "evaluated_candidates": [
+        {
+          "driver_id": "DRV-38214",
+          "status": "offline",
+          "straight_line_distance_km": 0.87,
+          "road_eta_minutes": 14.0,
+          "outcome": "excluded",
+          "reason": "Status offline; removed before model call. Snapshot route note: Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+        },
+        {
+          "driver_id": "DRV-52907",
+          "status": "available",
+          "straight_line_distance_km": 1.03,
+          "road_eta_minutes": 16.0,
+          "outcome": "not_selected",
+          "reason": "Road ETA 16 min versus selected 4 min; distance does not determine rank. Snapshot route note: Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+        },
+        {
+          "driver_id": "DRV-16643",
+          "status": "available",
+          "straight_line_distance_km": 1.14,
+          "road_eta_minutes": 4.0,
+          "outcome": "selected",
+          "reason": "Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via SE Grand Ave"
+        },
+        {
+          "driver_id": "DRV-29571",
+          "status": "on_trip",
+          "straight_line_distance_km": 1.4,
+          "road_eta_minutes": 6.0,
+          "outcome": "excluded",
+          "reason": "Status on_trip; removed before model call."
+        }
+      ],
+      "model_call": {
+        "requested_model": "liquid/lfm-2.5-2.6b:free",
+        "returned_model": "liquid/lfm-2.5-2.6b:free",
+        "generation_id": "gen-1794392855-fCmEANln4i1mJWadCRdR",
+        "started_at_utc": "2026-11-11T10:27:22.829064+00:00",
+        "finished_at_utc": "2026-11-11T10:27:36.488289+00:00",
+        "latency_ms": 13659.24,
+        "raw_content": "```json\n{\n  \"selected_driver_id\": \"DRV-16643\",\n  \"estimated_pickup_time_minutes\": 4.0,\n  \"decision_rationale\": \"DRV-16643 has the shortest actual pickup time (4.0 minutes) compared to DRV-52907 (16.0 minutes). Although DRV-52907 is slightly closer in straight-line distance (1.03 km vs 1.14 km), the actual pickup time is the primary selection criterion. DRV-16643's significantly faster pickup time makes it the better choice despite the marginally longer distance.\"\n}\n```"
+      },
+      "model_proposal": {
+        "selected_driver_id": "DRV-16643",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "DRV-16643 has the shortest actual pickup time (4.0 minutes) compared to DRV-52907 (16.0 minutes). Although DRV-52907 is slightly closer in straight-line distance (1.03 km vs 1.14 km), the actual pickup time is the primary selection criterion. DRV-16643's significantly faster pickup time makes it the better choice despite the marginally longer distance."
+      },
+      "verification": "model_verified"
+    },
+    "error": null
+  }
+}

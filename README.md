@@ -10,7 +10,7 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 - Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
 - **20 tests pass**, including the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
-- Still pending: successful real OpenRouter API run, matching Activity screenshot, and genuine Claude Code Plan Mode excerpt.
+- Successful live OpenRouter run and matching Activity/Logs screenshots are committed. Only the genuine Claude Code Plan Mode excerpt remains pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
 - Langfuse is deferred; no Langfuse tracing is claimed.
 
@@ -65,7 +65,29 @@ After the successful run, open https://openrouter.ai/activity and locate that ca
 ![OpenRouter Activity evidence](evidence/openrouter-activity.png)
 ```
 
-Review the live JSON and screenshot for identifiers or location data before publishing. Detailed live JSON is gitignored by default; publish a sanitized version or obtain explicit source-data publication authorization. No screenshot or live run has been fabricated or supplied in this repository.
+Review the live JSON and screenshot for identifiers or location data before publishing. Detailed live JSON is gitignored by default; publish a sanitized version or obtain explicit source-data publication authorization. The committed screenshots and live JSON are genuine records of the verified run described below.
+
+## Verified live submission evidence
+
+Executed on **11 November 2026 at 10:27 UTC / 15:57 IST** using `liquid/lfm-2.5-2.6b:free`.
+
+- Request: `RQ-0303-002`.
+- Winner: `DRV-16643`, available, **4 minutes**.
+- Closer available alternative: `DRV-52907`, **16 minutes**.
+- Verification: `model_verified`; offline and on-trip profiles were removed before the call.
+- Generation ID: `gen-1794392855-fCmEANln4i1mJWadCRdR`.
+- Client elapsed time: 13,659.24 ms; this includes network/API overhead and is distinct from provider latency shown in OpenRouter.
+- OpenRouter Logs display Nov 11, 03:57 PM in GMT+5:30, matching the UTC timestamps in [live-run.json](evidence/live-run.json).
+- OpenRouter reports **$0.00** cost for this call.
+- The temporary API key has a one-hour expiry and a $0 credit limit. Its secret is kept only in a private gitignored `.env`, never in source or published evidence. Configure your own key to reproduce after expiry.
+
+OpenRouter's current UI separates aggregate Activity from individual Logs, so both views are included.
+
+![OpenRouter Activity overview](evidence/openrouter-activity.png)
+
+![OpenRouter call timestamp and model](evidence/openrouter-call.png)
+
+![OpenRouter matching generation details](evidence/openrouter-generation.png)
 
 ## Source data and explicit mapping
 
@@ -139,9 +161,9 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 - [x] Two-node graph with pre-model availability filter
 - [x] Road ETA guard, bridge test and complete audit
 - [x] Offline run on actual data, all-request evaluation, and public aggregate summary
-- [ ] Private key configured locally and current :free model selected
-- [ ] Successful live API run with `model_verified`
-- [ ] Matching genuine OpenRouter Activity screenshot committed
+- [x] Temporary key configured privately; `liquid/lfm-2.5-2.6b:free` selected
+- [x] Successful live API run with `model_verified`
+- [x] Matching genuine OpenRouter Activity and generation screenshots committed
 - [ ] Genuine Claude Code Plan Mode excerpt added
 
 Before any local commit, `git check-ignore .env` should print `.env`, and `git ls-files .env` should print nothing. Never commit an API key. The included `.env.example` contains no credentials.
