@@ -1,0 +1,13 @@
+{
+  "stage": "stage-1-post-build-plan-review",
+  "commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+  "commit_role": "archived_artifact_and_associated_code_version",
+  "first_published_commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+  "evidence_mode": "user-terminal-capture",
+  "policy_scope": "Post-build Claude Code CLI with Ollama qwen3:8b; exact checkout commit not captured.",
+  "provenance_basis": "Git history: commit containing this artifact version. Original execution did not record a checkout SHA; this is not a retroactive runtime attestation.",
+  "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-revised.webp",
+  "artifact": "evidence/plan-revised.webp",
+  "sha256": "116b2e8c2abf82e4f4525d92f36bdeca9233af6c23f6cd46129c20ffe4047997",
+  "original_bytes_preserved": true
+}

@@ -924,5 +924,15 @@
         "verification": "offline_deterministic_demo_no_api_call"
       }
     }
-  ]
+  ],
+  "_evidence": {
+    "stage": "stage-2-three-tools",
+    "commit": "78700065daf4b1be83980799a1944664825a8906",
+    "commit_role": "archived_artifact_and_associated_code_version",
+    "first_published_commit": "78700065daf4b1be83980799a1944664825a8906",
+    "evidence_mode": "offline-validation",
+    "policy_scope": "Zero extra minutes; three named checks before provider; final fastest-driver guard.",
+    "provenance_basis": "Git history: commit containing this artifact version. Original execution did not record a checkout SHA; this is not a retroactive runtime attestation.",
+    "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-request-validation.json"
+  }
 }

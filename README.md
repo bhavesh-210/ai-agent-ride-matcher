@@ -14,6 +14,20 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
 - Langfuse is deferred; no Langfuse tracing is claimed.
 
+## Evidence stages and source versions
+
+Every evidence artifact now has a stage label and full commit: JSON files contain `_evidence`; screenshots and raw terminal logs have adjacent `.metadata.json` sidecars. The [evidence index](evidence/evidence-index.json) maps all artifacts and hashes. Screenshots and raw test logs were not edited. Commits identify the archived artifact/code version; older evidence did not record an execution checkout SHA, so these labels do not claim a retroactive runtime attestation. Collection-error logs explicitly describe their intermediate uncommitted state.
+
+| README claim | Stage and archived version | Proof from that version |
+|---|---|---|
+| Successful live call; available 16-minute driver could reach the model; 4-minute driver selected | Stage 1, pre-threshold, `1f5fae7` | [Live run](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/live-run.json) and [provider implementation](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/ride_matcher/graph.py) |
+| Zero-minute allowance and 33 passing tests, before named tools | Stage 2, inline policy, `0c6e31f` | [Policy validation](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/0c6e31f1903d61cab7fb65cc21879018873ad3cc/evidence/pickup-policy-validation.json) |
+| Three tools run before provider; outgoing bridge shortlist contains the 4-minute driver only at zero allowance | Stage 2, three tools, `7870006` | [Mocked provider prompt](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-prompt-preview.json) and [ordering/payload test](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/tests/test_agent_contract.py) |
+| 54 tests pass; 20 requests evaluated, 19 matches and one source-ID no-match | Stage 2, three tools, `7870006` | [Actual pytest output](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-final-pytest.txt) and [request audit](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-request-validation.json) |
+| Post-build Ollama planning review; visible times only | Stage 1, post-build review, `40602ce` | [Planning evidence and limitations](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/planning-review.md) |
+
+The Stage 1 live run does **not** prove Stage 2 pre-model threshold filtering. Stage 2 prompt/test evidence is mocked/offline; it does **not** represent another live OpenRouter call. The current matching implementation is the tested `7870006` version; this evidence-labeling update does not change matcher behavior.
+
 ## Install and verify
 
 Python 3.11+; run from the project root:
@@ -62,12 +76,12 @@ Success requires `verification: model_verified`, the actual returned/requested m
 After the successful run, open https://openrouter.ai/activity and locate that call. Match the recorded UTC time (convert to the page timezone), model and generation metadata. Save a genuine screenshot as `evidence/openrouter-activity.png`, cropping unrelated account details without hiding the required evidence. Then add:
 
 ```markdown
-![OpenRouter Activity evidence](evidence/openrouter-activity.png)
+![OpenRouter Activity evidence](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-activity.png)
 ```
 
 Review the live JSON and screenshot for identifiers or location data before publishing. Detailed live JSON is gitignored by default; publish a sanitized version or obtain explicit source-data publication authorization. The committed screenshots and live JSON are genuine records of the verified run described below.
 
-## Verified live submission evidence
+## Verified live submission evidence — Stage 1, pre-threshold (`1f5fae7`)
 
 Executed on **11 November 2026 at 10:27 UTC / 15:57 IST** using `liquid/lfm-2.5-2.6b:free`.
 
@@ -77,17 +91,17 @@ Executed on **11 November 2026 at 10:27 UTC / 15:57 IST** using `liquid/lfm-2.5-
 - Verification: `model_verified`; offline and on-trip profiles were removed before the call.
 - Generation ID: `gen-1794392855-fCmEANln4i1mJWadCRdR`.
 - Client elapsed time: 13,659.24 ms; this includes network/API overhead and is distinct from provider latency shown in OpenRouter.
-- OpenRouter Logs display Nov 11, 03:57 PM in GMT+5:30, matching the UTC timestamps in [live-run.json](evidence/live-run.json).
+- OpenRouter Logs display Nov 11, 03:57 PM in GMT+5:30, matching the UTC timestamps in [live-run.json](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/live-run.json).
 - OpenRouter reports **$0.00** cost for this call.
 - The temporary API key has a one-hour expiry and a $0 credit limit. Its secret is kept only in a private gitignored `.env`, never in source or published evidence. Configure your own key to reproduce after expiry.
 
 OpenRouter's current UI separates aggregate Activity from individual Logs, so both views are included.
 
-![OpenRouter Activity overview](evidence/openrouter-activity.png)
+![OpenRouter Activity overview](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-activity.png)
 
-![OpenRouter call timestamp and model](evidence/openrouter-call.png)
+![OpenRouter call timestamp and model](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-call.png)
 
-![OpenRouter matching generation details](evidence/openrouter-generation.png)
+![OpenRouter matching generation details](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-generation.png)
 
 ## Source data and explicit mapping
 
@@ -151,7 +165,7 @@ Exactly two graph nodes remain. Node 1 calls three deterministic Python tools in
 2. `estimate_pickup_time`: reads validated `road_pickup_minutes` via the explicit CSV mapping; returns no route for missing values. It does not estimate time from distance or invent traffic.
 3. `check_eligibility`: applies availability, route presence and the inclusive shared extra-minute allowance relative to the fastest available route.
 
-All three execute before Node 2 calls OpenRouter. These are graph-invoked Python tools, not optional LLM-requested checks. The mocked HTTP contract test records every tool call and inspects the actual provider messages, proving that the outgoing candidate IDs exactly equal the checked set. [Captured provider prompt](evidence/stage2-prompt-preview.json) is explicitly **mock transport evidence, not a new live call**.
+All three execute before Node 2 calls OpenRouter. These are graph-invoked Python tools, not optional LLM-requested checks. The mocked HTTP contract test records every tool call and inspects the actual provider messages, proving that the outgoing candidate IDs exactly equal the checked set. [Captured provider prompt](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-prompt-preview.json) is explicitly **mock transport evidence, not a new live call**.
 
 The key prompt requires a fixed JSON response with `selected_driver_id`, `estimated_pickup_time_minutes`, and `decision_rationale`, copied road ETA, and driver-ID tie-breaking. Code rejects IDs outside the checked list, incorrect ETAs and nonminimum picks. It retains the proposal, uses the deterministic road-ETA winner and records the override. Straight-line distance does not rank or break ties.
 
@@ -166,10 +180,10 @@ This is the actual sequence for this stage, not a reconstructed claim of earlier
 | Run / finding | Cause | Fix made or rejected, and why |
 |---|---|---|
 | Previous stage: 33 tests passed | Existing inline checks lacked the newly required named tools | Added a new contract suite before refactoring; prior passing tests alone did not prove this requirement. |
-| First new-suite run: collection error, `cannot import name tools` | The three checks still lived inline and `ride_matcher/tools.py` did not exist | Added the three tool functions and wired all three into Node 1 before OpenRouter. [Original output](evidence/stage2-first-pytest.txt). |
-| Second run: collection error, `request is a reserved name` | New parameterized test used pytest's reserved fixture name | Renamed the test parameter to `ride_request`. [Original output](evidence/stage2-second-pytest.txt). |
+| First new-suite run: collection error, `cannot import name tools` | The three checks still lived inline and `ride_matcher/tools.py` did not exist | Added the three tool functions and wired all three into Node 1 before OpenRouter. [Original output](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-first-pytest.txt). |
+| Second run: collection error, `request is a reserved name` | New parameterized test used pytest's reserved fixture name | Renamed the test parameter to `ride_request`. [Original output](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-second-pytest.txt). |
 | Source join finding: `RQ-0308-018` has no candidates; four rows reference `RQ-0309-018` | Request IDs differ between supplied files | Rejected silently relabeling source rows: there is no authoritative correction. Preserve IDs, report the anomaly and return an explicit no-match. |
-| Final run: **54 passed, 1 warning** | All implemented matching contracts pass | [Full output](evidence/stage2-final-pytest.txt). The remaining warning comes from the installed anyio pytest plugin's deprecated pytest alias, not a matcher failure. |
+| Final run: **54 passed, 1 warning** | All implemented matching contracts pass | [Full output](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-final-pytest.txt). The remaining warning comes from the installed anyio pytest plugin's deprecated pytest alias, not a matcher failure. |
 
 No assignment mismatch failure is claimed for the collection-error runs: collection stopped before assignments could execute. No failures or timestamps have been invented. The prior planning review and this work occurred after the original build.
 
@@ -181,7 +195,7 @@ No assignment mismatch failure is claimed for the collection-error runs: collect
 | `RQ-0303-002` | `DRV-16643` | available | 4 min | 16 min (`DRV-52907`) | Retain 4-minute winner; reject closest-looking bridge driver and extra bridge penalties because detour is already in supplied ETA. |
 | `RQ-0304-005` | `DRV-47038` | available | 4 min | 8 min (`DRV-26148`) | Retain faster road-ETA assignment; reject distance-based ranking. |
 
-These comparisons were reproduced from the source rows and current offline outputs; no source data was changed. [All-request report and per-candidate audit](evidence/stage2-request-validation.json).
+These comparisons were reproduced from the source rows and current offline outputs; no source data was changed. [All-request report and per-candidate audit](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-request-validation.json).
 
 ### All 20 requests and the explicit data exception
 
@@ -204,7 +218,7 @@ This review ran **after the original implementation already existed**, on a sepa
 
 The original-plan screenshot shows **done 5:29 PM**; the revised-plan screenshot shows **done 5:34 PM**. No calendar date or timezone is inferred from filenames or system settings.
 
-[Read the actual planning evidence, excerpts and limitations](evidence/planning-review.md).
+[Read the actual planning evidence, excerpts and limitations](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/planning-review.md).
 
 ### Original proposal and actual pushback
 
@@ -220,15 +234,15 @@ The screenshot of the actual pushback requests removal of invented ranking input
 
 > Verifies ETA is deterministic minimum
 
-![Original plan before pushback — terminal shows done 5:29 PM](evidence/plan-original.webp)
+![Original plan before pushback — terminal shows done 5:29 PM](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-original.webp)
 
-![Actual pushback and revised plan — terminal shows done 5:34 PM](evidence/plan-revised.webp)
+![Actual pushback and revised plan — terminal shows done 5:34 PM](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-revised.webp)
 
 ### Terminal proof and remaining limitation
 
-[Repository-copy terminal screenshot](evidence/plan-terminal.webp) shows `~/ai-agent-ride-matcher-plan-review`, `qwen3:8b` and `plan mode on`.
+[Repository-copy terminal screenshot](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-terminal.webp) shows `~/ai-agent-ride-matcher-plan-review`, `qwen3:8b` and `plan mode on`.
 
-[Earlier launch-command screenshot](evidence/plan-launch-command.webp) shows `ollama launch claude --model qwen3:8b -- --permission-mode plan` and Plan Mode, but in the home folder. It is an earlier session, not evidence of the later repository-copy launch command. A screenshot of that later session's own launch command remains pending. Reviewer acceptance is not claimed.
+[Earlier launch-command screenshot](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-launch-command.webp) shows `ollama launch claude --model qwen3:8b -- --permission-mode plan` and Plan Mode, but in the home folder. It is an earlier session, not evidence of the later repository-copy launch command. A screenshot of that later session's own launch command remains pending. Reviewer acceptance is not claimed.
 
 ## Optional local API
 

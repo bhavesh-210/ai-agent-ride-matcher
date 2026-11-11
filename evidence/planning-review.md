@@ -1,3 +1,5 @@
+> Evidence stage: `stage-1-post-build-plan-review`. Archived version commit: [`40602ce`](https://github.com/bhavesh-210/ai-agent-ride-matcher/commit/40602ceab0681b52ce1c65faac96f0b636f5ebcc). This identifies the archived version, not a verified execution checkout.
+
 # Claude Code Plan Mode review evidence
 
 ## Setup and timing
@@ -81,3 +83,4 @@ The revised response removed the invented ranking inputs and added explicit mode
 - Acceptance of this setup and evidence remains the reviewer's decision.
 
 The WebP files are lossless, pixel-identical conversions of the supplied PNG screenshots. Their displayed contents were not altered.
+

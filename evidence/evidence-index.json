@@ -1,0 +1,216 @@
+{
+  "_evidence": {
+    "stage": "evidence-provenance-index",
+    "commit": "78700065daf4b1be83980799a1944664825a8906",
+    "commit_role": "source_revision_being_catalogued",
+    "provenance_basis": "Artifact revisions derived from Git history; see per-file execution limitations."
+  },
+  "conventions": {
+    "commit": "Existing archive commit containing the artifact version before this labeling update; not the new label commit and not a proven execution checkout.",
+    "sidecars": "Screenshots and raw pytest logs retain their original bytes. Their .metadata.json files carry stage, commit and SHA-256.",
+    "json": "JSON evidence has an additive _evidence object. Original payload fields remain unchanged.",
+    "regeneration": "After regenerating any evidence, update its stage/commit metadata and hashes. Never retain an older provenance label for a newer run."
+  },
+  "artifacts": [
+    {
+      "artifact": "evidence/assignment-bridge-offline.json",
+      "stage": "stage-1-pre-threshold-snapshot",
+      "commit": "4b324995894f82678e186f93b8baa3a4eb392b28",
+      "metadata": "evidence/assignment-bridge-offline.json#_evidence",
+      "sha256": "c490adb48098d31214112b96ce002e058b5f0580fc4249f318626ebbccaea55c",
+      "original_sha256_before_label": "10fc0354b19000c4c875dbfc4f9f49e4a55af5e4ff2d5b66f06e16e3f84cd543",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/4b324995894f82678e186f93b8baa3a4eb392b28/evidence/assignment-bridge-offline.json"
+    },
+    {
+      "artifact": "evidence/assignment-evaluation.json",
+      "stage": "stage-1-pre-threshold-snapshot",
+      "commit": "4b324995894f82678e186f93b8baa3a4eb392b28",
+      "metadata": "evidence/assignment-evaluation.json#_evidence",
+      "sha256": "29cb948b81ba53c7d5b746345eecd24366152b97fb02f11a1fd005f5cb8892b2",
+      "original_sha256_before_label": "5abfc74df7f4d23a2ed7068bac82f884c353a829e22f978cadf73378d9ae2489",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/4b324995894f82678e186f93b8baa3a4eb392b28/evidence/assignment-evaluation.json"
+    },
+    {
+      "artifact": "evidence/assignment-sample-offline.json",
+      "stage": "stage-1-pre-threshold-snapshot",
+      "commit": "4b324995894f82678e186f93b8baa3a4eb392b28",
+      "metadata": "evidence/assignment-sample-offline.json#_evidence",
+      "sha256": "8a6e1bf731f00790be86a8227ea3a6384bca1ab51cb0f7224e45b9e82a007c2d",
+      "original_sha256_before_label": "bac17d00893c9b1c1728faa6e51f3e80032e2b1843e5d260befc15a5f868b81a",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/4b324995894f82678e186f93b8baa3a4eb392b28/evidence/assignment-sample-offline.json"
+    },
+    {
+      "artifact": "evidence/assignment-summary.json",
+      "stage": "stage-1-pre-threshold-snapshot",
+      "commit": "4b324995894f82678e186f93b8baa3a4eb392b28",
+      "metadata": "evidence/assignment-summary.json#_evidence",
+      "sha256": "8e4af14e87c074ed01e382ff4c53c9c973c7776fbcbf1a48b34be1271c080056",
+      "original_sha256_before_label": "772e19b69be2577b0be1d78b879a40e9b0945b0ca76abf9378f3a9bd6f4134f5",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/4b324995894f82678e186f93b8baa3a4eb392b28/evidence/assignment-summary.json"
+    },
+    {
+      "artifact": "evidence/live-run.json",
+      "stage": "stage-1-pre-threshold-live",
+      "commit": "1f5fae7bd4615da6a28e85037ff47961bc30a478",
+      "metadata": "evidence/live-run.json#_evidence",
+      "sha256": "6c74a3656b9b49f3e3be2a31834d52f74d7b4ad3786c01651685a9f1d3d6c428",
+      "original_sha256_before_label": "fbc47baa3b9f82dbbf958da01456d0ab59fa766a581f31929d1934c8f31d9799",
+      "evidence_mode": "live-api",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/live-run.json"
+    },
+    {
+      "artifact": "evidence/offline-demo.json",
+      "stage": "stage-1-synthetic-demo",
+      "commit": "5a1e8ecd06ff57ed7fc64600f3993007fb9bac52",
+      "metadata": "evidence/offline-demo.json#_evidence",
+      "sha256": "bbc4ad5e21f469738518c4fb532e0ff63243412961e132d0bb7be7a36f6f1d93",
+      "original_sha256_before_label": "a8fe45873e6c35f17bf1d3aeb5e2e8f3cb492a832e5e9445424d70621d426454",
+      "evidence_mode": "offline-synthetic",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/5a1e8ecd06ff57ed7fc64600f3993007fb9bac52/evidence/offline-demo.json"
+    },
+    {
+      "artifact": "evidence/openrouter-activity.png",
+      "stage": "stage-1-pre-threshold-live",
+      "commit": "1f5fae7bd4615da6a28e85037ff47961bc30a478",
+      "metadata": "evidence/openrouter-activity.png.metadata.json",
+      "sha256": "dc91a5392c132c28df2538d033638a8f6ecff61a7ee859ccf80602a1758b8d23",
+      "original_sha256_before_label": "dc91a5392c132c28df2538d033638a8f6ecff61a7ee859ccf80602a1758b8d23",
+      "evidence_mode": "live-api-ui-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-activity.png"
+    },
+    {
+      "artifact": "evidence/openrouter-call.png",
+      "stage": "stage-1-pre-threshold-live",
+      "commit": "1f5fae7bd4615da6a28e85037ff47961bc30a478",
+      "metadata": "evidence/openrouter-call.png.metadata.json",
+      "sha256": "05ec2e10d790339478799eabbba454a26f253da44a96442e7c40e9a8c288379d",
+      "original_sha256_before_label": "05ec2e10d790339478799eabbba454a26f253da44a96442e7c40e9a8c288379d",
+      "evidence_mode": "live-api-ui-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-call.png"
+    },
+    {
+      "artifact": "evidence/openrouter-generation.png",
+      "stage": "stage-1-pre-threshold-live",
+      "commit": "1f5fae7bd4615da6a28e85037ff47961bc30a478",
+      "metadata": "evidence/openrouter-generation.png.metadata.json",
+      "sha256": "ec9dbde70c59bd3ce5ece6b10c6b106ca8057c1074ca7c899338b2b1792c312b",
+      "original_sha256_before_label": "ec9dbde70c59bd3ce5ece6b10c6b106ca8057c1074ca7c899338b2b1792c312b",
+      "evidence_mode": "live-api-ui-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-generation.png"
+    },
+    {
+      "artifact": "evidence/pickup-policy-validation.json",
+      "stage": "stage-2-threshold-inline",
+      "commit": "0c6e31f1903d61cab7fb65cc21879018873ad3cc",
+      "metadata": "evidence/pickup-policy-validation.json#_evidence",
+      "sha256": "c185f58ddd50bd16f4ed3fb9992221ce1c74ae92d7a23b49b4a8593f438e48fa",
+      "original_sha256_before_label": "ff8e0d48a69fbf8aa1876afef43fac3584e18d0cde6fc7e04264abe0a00e7f21",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/0c6e31f1903d61cab7fb65cc21879018873ad3cc/evidence/pickup-policy-validation.json"
+    },
+    {
+      "artifact": "evidence/plan-launch-command.webp",
+      "stage": "stage-1-post-build-plan-review",
+      "commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+      "metadata": "evidence/plan-launch-command.webp.metadata.json",
+      "sha256": "cfb8931af9555463e895a4402c0f58ee923d35823bebceee7b0effe410f7a925",
+      "original_sha256_before_label": "cfb8931af9555463e895a4402c0f58ee923d35823bebceee7b0effe410f7a925",
+      "evidence_mode": "user-terminal-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-launch-command.webp"
+    },
+    {
+      "artifact": "evidence/plan-original.webp",
+      "stage": "stage-1-post-build-plan-review",
+      "commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+      "metadata": "evidence/plan-original.webp.metadata.json",
+      "sha256": "fe3489b4eff032cab3bb5cbff74385d3f579b7938bc9c2a64c4d4fad16f6e6cb",
+      "original_sha256_before_label": "fe3489b4eff032cab3bb5cbff74385d3f579b7938bc9c2a64c4d4fad16f6e6cb",
+      "evidence_mode": "user-terminal-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-original.webp"
+    },
+    {
+      "artifact": "evidence/plan-revised.webp",
+      "stage": "stage-1-post-build-plan-review",
+      "commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+      "metadata": "evidence/plan-revised.webp.metadata.json",
+      "sha256": "116b2e8c2abf82e4f4525d92f36bdeca9233af6c23f6cd46129c20ffe4047997",
+      "original_sha256_before_label": "116b2e8c2abf82e4f4525d92f36bdeca9233af6c23f6cd46129c20ffe4047997",
+      "evidence_mode": "user-terminal-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-revised.webp"
+    },
+    {
+      "artifact": "evidence/plan-terminal.webp",
+      "stage": "stage-1-post-build-plan-review",
+      "commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+      "metadata": "evidence/plan-terminal.webp.metadata.json",
+      "sha256": "ee03b5da855689359b97178d1daa63538fc8221cd1088e3066612ee32a2a782d",
+      "original_sha256_before_label": "ee03b5da855689359b97178d1daa63538fc8221cd1088e3066612ee32a2a782d",
+      "evidence_mode": "user-terminal-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/plan-terminal.webp"
+    },
+    {
+      "artifact": "evidence/planning-review.md",
+      "stage": "stage-1-post-build-plan-review",
+      "commit": "40602ceab0681b52ce1c65faac96f0b636f5ebcc",
+      "metadata": "evidence/planning-review.md.metadata.json",
+      "sha256": "837507a91e5aeda91b77dc23836446a406a1a6aee629d9493461d52faf6e22c8",
+      "original_sha256_before_label": "22ea153a7e9899836101fa1814c84f061f1b00beb928e301b2c846ab837d9b50",
+      "evidence_mode": "user-terminal-capture",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/planning-review.md"
+    },
+    {
+      "artifact": "evidence/stage2-final-pytest.txt",
+      "stage": "stage-2-three-tools",
+      "commit": "78700065daf4b1be83980799a1944664825a8906",
+      "metadata": "evidence/stage2-final-pytest.txt.metadata.json",
+      "sha256": "479859d2208cd1a383204aa5f339cddaca113e2829a3476caaf328ae11c794b3",
+      "original_sha256_before_label": "479859d2208cd1a383204aa5f339cddaca113e2829a3476caaf328ae11c794b3",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-final-pytest.txt"
+    },
+    {
+      "artifact": "evidence/stage2-first-pytest.txt",
+      "stage": "stage-2-three-tools",
+      "commit": "78700065daf4b1be83980799a1944664825a8906",
+      "metadata": "evidence/stage2-first-pytest.txt.metadata.json",
+      "sha256": "9782d7f80174b84684816ad11945463e0e3c9296b240eb3056947d1f997fb84d",
+      "original_sha256_before_label": "9782d7f80174b84684816ad11945463e0e3c9296b240eb3056947d1f997fb84d",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-first-pytest.txt"
+    },
+    {
+      "artifact": "evidence/stage2-prompt-preview.json",
+      "stage": "stage-2-three-tools",
+      "commit": "78700065daf4b1be83980799a1944664825a8906",
+      "metadata": "evidence/stage2-prompt-preview.json#_evidence",
+      "sha256": "ae68b2011c26651cbb48316f94db34c7c4eb7a63015a6dd0065c39ffcf10b6f5",
+      "original_sha256_before_label": "b04924e949593c551a9b796dcd9c2414343909ee9b1c33e2f09cbc3b012cd958",
+      "evidence_mode": "mocked-http",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-prompt-preview.json"
+    },
+    {
+      "artifact": "evidence/stage2-request-validation.json",
+      "stage": "stage-2-three-tools",
+      "commit": "78700065daf4b1be83980799a1944664825a8906",
+      "metadata": "evidence/stage2-request-validation.json#_evidence",
+      "sha256": "b09bfc1257020581da753f9ae06600db728402bed3ba00621b445cf9d4330735",
+      "original_sha256_before_label": "a2ce6f8b495d3f05761296808762c70f5aceb98ff10d75ff70ac2c121ffce336",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-request-validation.json"
+    },
+    {
+      "artifact": "evidence/stage2-second-pytest.txt",
+      "stage": "stage-2-three-tools",
+      "commit": "78700065daf4b1be83980799a1944664825a8906",
+      "metadata": "evidence/stage2-second-pytest.txt.metadata.json",
+      "sha256": "4b636797913ad28d1e453025e782d17f49f3a4801b1805901ca294bc28e78e46",
+      "original_sha256_before_label": "4b636797913ad28d1e453025e782d17f49f3a4801b1805901ca294bc28e78e46",
+      "evidence_mode": "offline-validation",
+      "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-second-pytest.txt"
+    }
+  ]
+}

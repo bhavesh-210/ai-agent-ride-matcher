@@ -8,5 +8,15 @@
   "candidate_row_count": 80,
   "matched_request_count": 19,
   "strict_eta_improvement_count": 7,
-  "new_live_api_call": false
+  "new_live_api_call": false,
+  "_evidence": {
+    "stage": "stage-2-threshold-inline",
+    "commit": "0c6e31f1903d61cab7fb65cc21879018873ad3cc",
+    "commit_role": "archived_artifact_and_associated_code_version",
+    "first_published_commit": "0c6e31f1903d61cab7fb65cc21879018873ad3cc",
+    "evidence_mode": "offline-validation",
+    "policy_scope": "Zero extra minutes, inline checks; 33 passing tests; no new live API call.",
+    "provenance_basis": "Git history: commit containing this artifact version. Original execution did not record a checkout SHA; this is not a retroactive runtime attestation.",
+    "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/0c6e31f1903d61cab7fb65cc21879018873ad3cc/evidence/pickup-policy-validation.json"
+  }
 }

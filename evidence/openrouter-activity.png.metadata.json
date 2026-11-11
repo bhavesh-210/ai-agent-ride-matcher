@@ -1,0 +1,13 @@
+{
+  "stage": "stage-1-pre-threshold-live",
+  "commit": "1f5fae7bd4615da6a28e85037ff47961bc30a478",
+  "commit_role": "archived_artifact_and_associated_code_version",
+  "first_published_commit": "1f5fae7bd4615da6a28e85037ff47961bc30a478",
+  "evidence_mode": "live-api-ui-capture",
+  "policy_scope": "Available routable drivers sent before zero-minute shortlist policy; 16-minute driver could reach model; 4-minute final winner.",
+  "provenance_basis": "Git history: commit containing this artifact version. Original execution did not record a checkout SHA; this is not a retroactive runtime attestation.",
+  "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/1f5fae7bd4615da6a28e85037ff47961bc30a478/evidence/openrouter-activity.png",
+  "artifact": "evidence/openrouter-activity.png",
+  "sha256": "dc91a5392c132c28df2538d033638a8f6ecff61a7ee859ccf80602a1758b8d23",
+  "original_bytes_preserved": true
+}
