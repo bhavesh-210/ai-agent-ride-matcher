@@ -7,7 +7,7 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 ## Submission status
 
 - Implemented: LangGraph, Pydantic v2 validation, immutable state updates, OpenRouter integration, ETA guard, per-candidate audit, CLI, and optional FastAPI.
-- Assignment CSVs loaded and validated privately: **20 requests and 80 candidate rows**.
+- Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
 - **20 tests pass**, including the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
 - Still pending: successful real OpenRouter API run, matching Activity screenshot, and genuine Claude Code Plan Mode excerpt.
@@ -32,7 +32,7 @@ The private assignment files contain 20 requests and 80 driver rows. Local evalu
 
 Seven requests have a strictly faster road ETA than the nearest available driver. In the actual bridge example, the closer available driver takes 16 minutes due to a bridge-ramp detour; a farther available driver takes 4 minutes and wins. A separate freight/rail case chooses a 3-minute driver over a nearer 9-minute driver. Source flags are not used to rank candidates.
 
-An aggregate report is published in `evidence/assignment-summary.json`. Original source records, coordinates, identifiers and detailed audits are excluded from Git until public publication is explicitly authorized.
+An aggregate report is published in `evidence/assignment-summary.json`. The user explicitly authorized public publication of the supplied assignment CSVs and detailed offline audit outputs. They are included in this repository; API credentials remain excluded.
 
 To reproduce locally, place the request CSV at `data/source/requests.csv` and the candidate CSV at `data/source/drivers.csv`, then run:
 
@@ -69,7 +69,7 @@ Review the live JSON and screenshot for identifiers or location data before publ
 
 ## Source data and explicit mapping
 
-The private working copies are preserved byte-for-byte as `data/source/requests.csv` and `data/source/drivers.csv`. Their original titles are:
+The supplied assignment files are preserved byte-for-byte as `data/source/requests.csv` and `data/source/drivers.csv`. Their original titles are:
 
 - Uber Ride Requests Test Set (week of 3-9 March 2025).csv
 - Uber Candidate Drivers Snapshot (week of 3-9 March 2025).csv
@@ -92,7 +92,7 @@ One request has no matching candidate ID and four candidate rows reference an ab
 
 “Guaranteed pickup time” cannot be promised by a historical snapshot or LLM. The guard guarantees selection of the lowest supplied ETA among eligible routable candidates, not actual physical arrival. Historical status is not live availability. Production dispatch requires fresh routing/status and atomic reservation.
 
-Seven requests show a strict ETA improvement; equal-ETA ties are not counted as improvements. Detailed per-request reports remain private; only the aggregate summary is published.
+Seven requests show a strict ETA improvement; equal-ETA ties are not counted as improvements. Detailed offline per-request reports are published in `evidence/assignment-evaluation.json`, with individual samples in `evidence/assignment-bridge-offline.json` and `evidence/assignment-sample-offline.json`. These are not live API evidence.
 
 ## Two-node architecture
 
@@ -135,7 +135,7 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 
 - [x] Public GitHub repository with source and README
 - [x] Explicit CSV loader and private validation of actual assignment files
-- [ ] Authorization to publish source records (identifiers, timestamps and precise coordinates)
+- [x] Explicit authorization received; source CSVs and detailed offline audits published
 - [x] Two-node graph with pre-model availability filter
 - [x] Road ETA guard, bridge test and complete audit
 - [x] Offline run on actual data, all-request evaluation, and public aggregate summary
@@ -146,4 +146,4 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 
 Before any local commit, `git check-ignore .env` should print `.env`, and `git ls-files .env` should print nothing. Never commit an API key. The included `.env.example` contains no credentials.
 
-Validation: 20 tests pass locally on Python 3.12.14 with the supplied private CSVs. Without them, the 16 self-contained tests run and four assignment integration cases skip. Tests include synthetic and actual bridge cases, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.
+Validation: 20 tests pass locally on Python 3.12.14 with the supplied assignment CSVs. Without them, the 16 self-contained tests run and four assignment integration cases skip. Tests include synthetic and actual bridge cases, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.

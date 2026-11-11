@@ -1,0 +1,967 @@
+{
+  "mode": "offline_assignment_evaluation_no_api_call",
+  "request_count": 20,
+  "candidate_row_count": 80,
+  "matched_request_count": 19,
+  "strict_eta_improvement_count": 7,
+  "dataset_warnings": {
+    "requests_without_candidates": [
+      "RQ-0308-018"
+    ],
+    "orphan_candidate_request_ids": [
+      "RQ-0309-018"
+    ],
+    "candidate_counts": {
+      "RQ-0303-001": 4,
+      "RQ-0303-002": 4,
+      "RQ-0303-003": 4,
+      "RQ-0304-004": 4,
+      "RQ-0304-005": 4,
+      "RQ-0304-006": 4,
+      "RQ-0305-007": 4,
+      "RQ-0305-008": 4,
+      "RQ-0305-009": 4,
+      "RQ-0306-010": 4,
+      "RQ-0306-011": 4,
+      "RQ-0306-012": 4,
+      "RQ-0307-013": 4,
+      "RQ-0307-014": 4,
+      "RQ-0307-015": 4,
+      "RQ-0308-016": 4,
+      "RQ-0308-017": 4,
+      "RQ-0309-018": 4,
+      "RQ-0309-019": 4,
+      "RQ-0309-020": 4
+    },
+    "policy": "Exact request_id join only; unmatched source IDs are never silently corrected."
+  },
+  "requests": [
+    {
+      "request_id": "RQ-0303-001",
+      "nearest_available_driver_id": "DRV-20417",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-20417",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-20417: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-20417",
+            "status": "available",
+            "straight_line_distance_km": 0.31,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-31882",
+            "status": "available",
+            "straight_line_distance_km": 0.47,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-27760",
+            "status": "offline",
+            "straight_line_distance_km": 0.87,
+            "road_eta_minutes": 6.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          },
+          {
+            "driver_id": "DRV-44105",
+            "status": "available",
+            "straight_line_distance_km": 1.47,
+            "road_eta_minutes": 11.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 11 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Broadway Bridge westbound"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0303-002",
+      "nearest_available_driver_id": "DRV-52907",
+      "nearest_available_road_eta_minutes": 16.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-16643",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-16643: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-38214",
+            "status": "offline",
+            "straight_line_distance_km": 0.87,
+            "road_eta_minutes": 14.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call. Snapshot route note: Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+          },
+          {
+            "driver_id": "DRV-52907",
+            "status": "available",
+            "straight_line_distance_km": 1.03,
+            "road_eta_minutes": 16.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 16 min versus selected 4 min; distance does not determine rank. Snapshot route note: Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+          },
+          {
+            "driver_id": "DRV-16643",
+            "status": "available",
+            "straight_line_distance_km": 1.14,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via SE Grand Ave"
+          },
+          {
+            "driver_id": "DRV-29571",
+            "status": "on_trip",
+            "straight_line_distance_km": 1.4,
+            "road_eta_minutes": 6.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0303-003",
+      "nearest_available_driver_id": "DRV-20417",
+      "nearest_available_road_eta_minutes": 4.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-20417",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-20417: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-20417",
+            "status": "available",
+            "straight_line_distance_km": 0.37,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-47038",
+            "status": "available",
+            "straight_line_distance_km": 0.48,
+            "road_eta_minutes": 4.0,
+            "outcome": "not_selected",
+            "reason": "Equal road ETA; lost deterministic driver_id ascending tie-break."
+          },
+          {
+            "driver_id": "DRV-61290",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.9,
+            "road_eta_minutes": 5.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-35519",
+            "status": "available",
+            "straight_line_distance_km": 1.48,
+            "road_eta_minutes": 11.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 11 min versus selected 4 min; distance does not determine rank. Snapshot route note: Cross-river via Morrison Bridge westbound"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0304-004",
+      "nearest_available_driver_id": "DRV-18820",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-18820",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-18820: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-73351",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.41,
+            "road_eta_minutes": 2.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-18820",
+            "status": "available",
+            "straight_line_distance_km": 0.56,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-40976",
+            "status": "available",
+            "straight_line_distance_km": 0.92,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-55062",
+            "status": "offline",
+            "straight_line_distance_km": 1.7,
+            "road_eta_minutes": 11.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call. Snapshot route note: Cross-river via Steel Bridge lower deck"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0304-005",
+      "nearest_available_driver_id": "DRV-26148",
+      "nearest_available_road_eta_minutes": 8.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-47038",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-47038: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-26148",
+            "status": "available",
+            "straight_line_distance_km": 0.33,
+            "road_eta_minutes": 8.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 8 min versus selected 4 min; distance does not determine rank. Snapshot route note: One-way grid; loop via SW Broadway and SW Columbia"
+          },
+          {
+            "driver_id": "DRV-47038",
+            "status": "available",
+            "straight_line_distance_km": 0.67,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-33907",
+            "status": "offline",
+            "straight_line_distance_km": 0.68,
+            "road_eta_minutes": 7.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          },
+          {
+            "driver_id": "DRV-58423",
+            "status": "available",
+            "straight_line_distance_km": 1.52,
+            "road_eta_minutes": 12.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 12 min versus selected 4 min; distance does not determine rank. Snapshot route note: Cross-river via Morrison Bridge westbound ramp to SW Washington"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0304-006",
+      "nearest_available_driver_id": "DRV-64217",
+      "nearest_available_road_eta_minutes": 2.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-64217",
+        "estimated_pickup_time_minutes": 2.0,
+        "decision_rationale": "Selected DRV-64217: minimum supplied road ETA 2 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-64217",
+            "status": "available",
+            "straight_line_distance_km": 0.32,
+            "road_eta_minutes": 2.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-40976",
+            "status": "available",
+            "straight_line_distance_km": 0.51,
+            "road_eta_minutes": 3.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 3 min versus selected 2 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-19385",
+            "status": "available",
+            "straight_line_distance_km": 0.66,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 2 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-72604",
+            "status": "available",
+            "straight_line_distance_km": 2.35,
+            "road_eta_minutes": 13.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 13 min versus selected 2 min; distance does not determine rank. Snapshot route note: Cross-river via Hawthorne Bridge eastbound; lift span delay"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0305-007",
+      "nearest_available_driver_id": "DRV-36702",
+      "nearest_available_road_eta_minutes": 13.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-25793",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-25793: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-81046",
+            "status": "offline",
+            "straight_line_distance_km": 0.67,
+            "road_eta_minutes": 15.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call. Snapshot route note: Detour via one-way bridge ramp inbound only"
+          },
+          {
+            "driver_id": "DRV-36702",
+            "status": "available",
+            "straight_line_distance_km": 0.85,
+            "road_eta_minutes": 13.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 13 min versus selected 4 min; distance does not determine rank. Snapshot route note: Burnside Bridge westbound; no left onto SW 2nd; loop via Naito Pkwy"
+          },
+          {
+            "driver_id": "DRV-49831",
+            "status": "on_trip",
+            "straight_line_distance_km": 1.03,
+            "road_eta_minutes": 5.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-25793",
+            "status": "available",
+            "straight_line_distance_km": 1.06,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via NW Broadway"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0305-008",
+      "nearest_available_driver_id": "DRV-57120",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-57120",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-57120: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-57120",
+            "status": "available",
+            "straight_line_distance_km": 0.38,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-30458",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.61,
+            "road_eta_minutes": 3.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-68831",
+            "status": "available",
+            "straight_line_distance_km": 0.7,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-14562",
+            "status": "available",
+            "straight_line_distance_km": 2.39,
+            "road_eta_minutes": 12.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 12 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Morrison Bridge eastbound to SE Belmont"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0305-009",
+      "nearest_available_driver_id": "DRV-91254",
+      "nearest_available_road_eta_minutes": 7.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-57120",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-57120: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-91254",
+            "status": "available",
+            "straight_line_distance_km": 0.35,
+            "road_eta_minutes": 7.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 7 min versus selected 3 min; distance does not determine rank. Snapshot route note: One-way couplet on SE Stark; loop via SE 14th Ave"
+          },
+          {
+            "driver_id": "DRV-57120",
+            "status": "available",
+            "straight_line_distance_km": 0.47,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-30458",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.61,
+            "road_eta_minutes": 4.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-87563",
+            "status": "available",
+            "straight_line_distance_km": 1.99,
+            "road_eta_minutes": 11.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 11 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Burnside Bridge eastbound"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0306-010",
+      "nearest_available_driver_id": "DRV-23409",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-23409",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-23409: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-23409",
+            "status": "available",
+            "straight_line_distance_km": 0.35,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-42687",
+            "status": "offline",
+            "straight_line_distance_km": 0.65,
+            "road_eta_minutes": 4.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          },
+          {
+            "driver_id": "DRV-62973",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.91,
+            "road_eta_minutes": 5.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-77815",
+            "status": "offline",
+            "straight_line_distance_km": 2.36,
+            "road_eta_minutes": 14.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call. Snapshot route note: Cross-river via Burnside Bridge westbound; W Burnside uphill"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0306-011",
+      "nearest_available_driver_id": "DRV-34871",
+      "nearest_available_road_eta_minutes": 2.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-34871",
+        "estimated_pickup_time_minutes": 2.0,
+        "decision_rationale": "Selected DRV-34871: minimum supplied road ETA 2 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-34871",
+            "status": "available",
+            "straight_line_distance_km": 0.33,
+            "road_eta_minutes": 2.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-50316",
+            "status": "available",
+            "straight_line_distance_km": 0.43,
+            "road_eta_minutes": 3.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 3 min versus selected 2 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-88092",
+            "status": "available",
+            "straight_line_distance_km": 0.86,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 2 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-61745",
+            "status": "available",
+            "straight_line_distance_km": 1.16,
+            "road_eta_minutes": 11.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 11 min versus selected 2 min; distance does not determine rank. Snapshot route note: Tilikum Crossing transit only; routed via Ross Island Bridge"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0306-012",
+      "nearest_available_driver_id": "DRV-17239",
+      "nearest_available_road_eta_minutes": 9.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-45581",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-45581: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-17239",
+            "status": "available",
+            "straight_line_distance_km": 0.36,
+            "road_eta_minutes": 9.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 9 min versus selected 3 min; distance does not determine rank. Snapshot route note: Freight hold at SE Division Pl rail crossing; routed via SE 11th Ave"
+          },
+          {
+            "driver_id": "DRV-60118",
+            "status": "offline",
+            "straight_line_distance_km": 0.49,
+            "road_eta_minutes": 8.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          },
+          {
+            "driver_id": "DRV-45581",
+            "status": "available",
+            "straight_line_distance_km": 0.61,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-29014",
+            "status": "available",
+            "straight_line_distance_km": 1.88,
+            "road_eta_minutes": 12.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 12 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Hawthorne Bridge eastbound"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0307-013",
+      "nearest_available_driver_id": "DRV-56390",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-23409",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-23409: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-56390",
+            "status": "available",
+            "straight_line_distance_km": 0.36,
+            "road_eta_minutes": 3.0,
+            "outcome": "not_selected",
+            "reason": "Equal road ETA; lost deterministic driver_id ascending tie-break."
+          },
+          {
+            "driver_id": "DRV-23409",
+            "status": "available",
+            "straight_line_distance_km": 0.41,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-70482",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.71,
+            "road_eta_minutes": 4.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-35519",
+            "status": "available",
+            "straight_line_distance_km": 1.64,
+            "road_eta_minutes": 12.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 12 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Hawthorne Bridge westbound to SW Madison"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0307-014",
+      "nearest_available_driver_id": "DRV-48216",
+      "nearest_available_road_eta_minutes": 17.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-12938",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-12938: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-48216",
+            "status": "available",
+            "straight_line_distance_km": 0.87,
+            "road_eta_minutes": 17.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 17 min versus selected 4 min; distance does not determine rank. Snapshot route note: Detour via one-way bridge ramp inbound only; Burnside Bridge eastbound lane closure; routed via Steel Bridge"
+          },
+          {
+            "driver_id": "DRV-12938",
+            "status": "available",
+            "straight_line_distance_km": 0.95,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via NE MLK Jr Blvd"
+          },
+          {
+            "driver_id": "DRV-39467",
+            "status": "offline",
+            "straight_line_distance_km": 1.19,
+            "road_eta_minutes": 6.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          },
+          {
+            "driver_id": "DRV-66054",
+            "status": "on_trip",
+            "straight_line_distance_km": 1.21,
+            "road_eta_minutes": 15.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call. Snapshot route note: Cross-river via Morrison Bridge eastbound; queue at SE Water Ave exit"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0307-015",
+      "nearest_available_driver_id": "DRV-82715",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-82715",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-82715: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-82715",
+            "status": "available",
+            "straight_line_distance_km": 0.35,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-44917",
+            "status": "available",
+            "straight_line_distance_km": 0.58,
+            "road_eta_minutes": 4.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 4 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-59308",
+            "status": "available",
+            "straight_line_distance_km": 0.75,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-73351",
+            "status": "available",
+            "straight_line_distance_km": 1.63,
+            "road_eta_minutes": 12.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 12 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Broadway Bridge westbound to NW Lovejoy"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0308-016",
+      "nearest_available_driver_id": "DRV-28650",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-28650",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-28650: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-28650",
+            "status": "available",
+            "straight_line_distance_km": 0.34,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-91254",
+            "status": "available",
+            "straight_line_distance_km": 0.51,
+            "road_eta_minutes": 4.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 4 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-67402",
+            "status": "available",
+            "straight_line_distance_km": 0.88,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-15827",
+            "status": "available",
+            "straight_line_distance_km": 1.7,
+            "road_eta_minutes": 13.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 13 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Broadway Bridge eastbound; ramp to N Interstate Ave"
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0308-017",
+      "nearest_available_driver_id": "DRV-53761",
+      "nearest_available_road_eta_minutes": 9.0,
+      "strict_eta_improvement_over_nearest": true,
+      "final_match": {
+        "selected_driver_id": "DRV-34871",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-34871: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-53761",
+            "status": "available",
+            "straight_line_distance_km": 0.33,
+            "road_eta_minutes": 9.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 9 min versus selected 4 min; distance does not determine rank. Snapshot route note: I-405 on-ramp only from SW 6th; loop via SW Harrison and SW 4th Ave"
+          },
+          {
+            "driver_id": "DRV-34871",
+            "status": "available",
+            "straight_line_distance_km": 0.48,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-21094",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.68,
+            "road_eta_minutes": 5.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-46638",
+            "status": "offline",
+            "straight_line_distance_km": 0.83,
+            "road_eta_minutes": 6.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0308-018",
+      "nearest_available_driver_id": null,
+      "nearest_available_road_eta_minutes": null,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": null,
+        "estimated_pickup_time_minutes": null,
+        "decision_rationale": "No available driver has a usable road ETA; no match made.",
+        "evaluated_candidates": [],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "no_candidates"
+      }
+    },
+    {
+      "request_id": "RQ-0309-019",
+      "nearest_available_driver_id": "DRV-77815",
+      "nearest_available_road_eta_minutes": 3.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-77815",
+        "estimated_pickup_time_minutes": 3.0,
+        "decision_rationale": "Selected DRV-77815: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-77815",
+            "status": "available",
+            "straight_line_distance_km": 0.35,
+            "road_eta_minutes": 3.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-42687",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.52,
+            "road_eta_minutes": 3.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-82715",
+            "status": "available",
+            "straight_line_distance_km": 0.89,
+            "road_eta_minutes": 5.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 5 min versus selected 3 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-25793",
+            "status": "on_trip",
+            "straight_line_distance_km": 1.09,
+            "road_eta_minutes": 6.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    },
+    {
+      "request_id": "RQ-0309-020",
+      "nearest_available_driver_id": "DRV-84392",
+      "nearest_available_road_eta_minutes": 2.0,
+      "strict_eta_improvement_over_nearest": false,
+      "final_match": {
+        "selected_driver_id": "DRV-84392",
+        "estimated_pickup_time_minutes": 2.0,
+        "decision_rationale": "Selected DRV-84392: minimum supplied road ETA 2 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-84392",
+            "status": "available",
+            "straight_line_distance_km": 0.34,
+            "road_eta_minutes": 2.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+          },
+          {
+            "driver_id": "DRV-68831",
+            "status": "available",
+            "straight_line_distance_km": 0.59,
+            "road_eta_minutes": 4.0,
+            "outcome": "not_selected",
+            "reason": "Road ETA 4 min versus selected 2 min; distance does not determine rank."
+          },
+          {
+            "driver_id": "DRV-30458",
+            "status": "on_trip",
+            "straight_line_distance_km": 0.71,
+            "road_eta_minutes": 4.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          },
+          {
+            "driver_id": "DRV-56390",
+            "status": "offline",
+            "straight_line_distance_km": 2.3,
+            "road_eta_minutes": 9.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call."
+          }
+        ],
+        "model_call": null,
+        "model_proposal": null,
+        "verification": "offline_deterministic_demo_no_api_call"
+      }
+    }
+  ]
+}

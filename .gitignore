@@ -6,7 +6,5 @@ __pycache__/
 .pytest_cache/
 *.pyc
 .DS_Store
-# Assignment files and detailed evidence may contain private location data.
-data/source/
-evidence/assignment*.json
+# Live output needs review before publication; source assignment publication is authorized.
 evidence/live*.json

@@ -7,5 +7,5 @@
   "orphan_candidate_row_count": 4,
   "strict_eta_improvement_count": 7,
   "tests_passed_with_private_assignment_data": 20,
-  "note": "Aggregate summary only. Source records and detailed audits are kept private pending publication authorization. This is not evidence of a live OpenRouter call."
+  "note": "Aggregate summary. Assignment sources and detailed offline audits are published with explicit user authorization. This is not evidence of a live OpenRouter call."
 }

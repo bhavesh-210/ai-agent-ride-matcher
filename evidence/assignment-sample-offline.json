@@ -1,0 +1,179 @@
+{
+  "dataset_warnings": {
+    "requests_without_candidates": [
+      "RQ-0308-018"
+    ],
+    "orphan_candidate_request_ids": [
+      "RQ-0309-018"
+    ],
+    "candidate_counts": {
+      "RQ-0303-001": 4,
+      "RQ-0303-002": 4,
+      "RQ-0303-003": 4,
+      "RQ-0304-004": 4,
+      "RQ-0304-005": 4,
+      "RQ-0304-006": 4,
+      "RQ-0305-007": 4,
+      "RQ-0305-008": 4,
+      "RQ-0305-009": 4,
+      "RQ-0306-010": 4,
+      "RQ-0306-011": 4,
+      "RQ-0306-012": 4,
+      "RQ-0307-013": 4,
+      "RQ-0307-014": 4,
+      "RQ-0307-015": 4,
+      "RQ-0308-016": 4,
+      "RQ-0308-017": 4,
+      "RQ-0309-018": 4,
+      "RQ-0309-019": 4,
+      "RQ-0309-020": 4
+    },
+    "policy": "Exact request_id join only; unmatched source IDs are never silently corrected."
+  },
+  "mode": "offline_demo",
+  "input_sha256": {
+    "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+    "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+  },
+  "result": {
+    "request": {
+      "request_id": "RQ-0306-012",
+      "rider_id": "RD-81240",
+      "pickup_coordinates": {
+        "lat": 45.5318,
+        "lon": -122.6665
+      }
+    },
+    "all_candidates": [
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-17239",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5063,
+          "lon": -122.6599
+        },
+        "straight_line_distance_km": 0.36,
+        "actual_pickup_time_minutes": 9.0,
+        "route_note": "Freight hold at SE Division Pl rail crossing; routed via SE 11th Ave"
+      },
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-60118",
+        "status": "offline",
+        "coordinates": {
+          "lat": 45.5038,
+          "lon": -122.654
+        },
+        "straight_line_distance_km": 0.49,
+        "actual_pickup_time_minutes": 8.0,
+        "route_note": ""
+      },
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-45581",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5134,
+          "lon": -122.6573
+        },
+        "straight_line_distance_km": 0.61,
+        "actual_pickup_time_minutes": 3.0,
+        "route_note": ""
+      },
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-29014",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.515,
+          "lon": -122.678
+        },
+        "straight_line_distance_km": 1.88,
+        "actual_pickup_time_minutes": 12.0,
+        "route_note": "Cross-river via Hawthorne Bridge eastbound"
+      }
+    ],
+    "eligible_candidates": [
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-17239",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5063,
+          "lon": -122.6599
+        },
+        "straight_line_distance_km": 0.36,
+        "actual_pickup_time_minutes": 9.0,
+        "route_note": "Freight hold at SE Division Pl rail crossing; routed via SE 11th Ave"
+      },
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-45581",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.5134,
+          "lon": -122.6573
+        },
+        "straight_line_distance_km": 0.61,
+        "actual_pickup_time_minutes": 3.0,
+        "route_note": ""
+      },
+      {
+        "request_id": "RQ-0306-012",
+        "driver_id": "DRV-29014",
+        "status": "available",
+        "coordinates": {
+          "lat": 45.515,
+          "lon": -122.678
+        },
+        "straight_line_distance_km": 1.88,
+        "actual_pickup_time_minutes": 12.0,
+        "route_note": "Cross-river via Hawthorne Bridge eastbound"
+      }
+    ],
+    "final_match": {
+      "selected_driver_id": "DRV-45581",
+      "estimated_pickup_time_minutes": 3.0,
+      "decision_rationale": "Selected DRV-45581: minimum supplied road ETA 3 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+      "evaluated_candidates": [
+        {
+          "driver_id": "DRV-17239",
+          "status": "available",
+          "straight_line_distance_km": 0.36,
+          "road_eta_minutes": 9.0,
+          "outcome": "not_selected",
+          "reason": "Road ETA 9 min versus selected 3 min; distance does not determine rank. Snapshot route note: Freight hold at SE Division Pl rail crossing; routed via SE 11th Ave"
+        },
+        {
+          "driver_id": "DRV-60118",
+          "status": "offline",
+          "straight_line_distance_km": 0.49,
+          "road_eta_minutes": 8.0,
+          "outcome": "excluded",
+          "reason": "Status offline; removed before model call."
+        },
+        {
+          "driver_id": "DRV-45581",
+          "status": "available",
+          "straight_line_distance_km": 0.61,
+          "road_eta_minutes": 3.0,
+          "outcome": "selected",
+          "reason": "Lowest road ETA; equal ETA ties use driver_id ascending."
+        },
+        {
+          "driver_id": "DRV-29014",
+          "status": "available",
+          "straight_line_distance_km": 1.88,
+          "road_eta_minutes": 12.0,
+          "outcome": "not_selected",
+          "reason": "Road ETA 12 min versus selected 3 min; distance does not determine rank. Snapshot route note: Cross-river via Hawthorne Bridge eastbound"
+        }
+      ],
+      "model_call": null,
+      "model_proposal": null,
+      "verification": "offline_deterministic_demo_no_api_call"
+    },
+    "error": null
+  }
+}
