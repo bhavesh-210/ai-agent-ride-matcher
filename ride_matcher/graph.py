@@ -2,23 +2,38 @@ from langgraph.graph import StateGraph, START, END
 from .models import AgentState, CandidateAudit, MatchResult
 from .config import MatchingConfig
 from . import tools as candidate_tools
+from .tracing import observation, candidate_input, decision_output
 
 
-def filter_available_drivers(state: AgentState, config: MatchingConfig | None = None):
+def filter_available_drivers(state: AgentState, config: MatchingConfig | None = None, tracer=None):
     """New validated state updates; never mutate incoming state."""
     config = config if config is not None else MatchingConfig.from_env()
-    # Run both snapshot tools for every row before computing the shared baseline.
-    checks = tuple((d, candidate_tools.check_availability(d),
-                    candidate_tools.estimate_pickup_time(d)) for d in state.all_candidates)
+    checks = []
+    for d in state.all_candidates:
+        with observation(tracer, "check_availability", as_type="tool", input={"driver_id":d.driver_id,"status":d.status}) as span:
+            available = candidate_tools.check_availability(d)
+            span.update(output={"available":available})
+        with observation(tracer, "estimate_pickup_time", as_type="tool", input={"driver_id":d.driver_id,"route_note":d.route_note}) as span:
+            eta = candidate_tools.estimate_pickup_time(d)
+            span.update(output={"road_pickup_minutes":eta,"source":"snapshot"})
+        checks.append((d, available, eta))
     fastest = min((eta for _, available, eta in checks if available and eta is not None), default=None)
-    eligible = tuple(d for d, available, eta in checks
-                     if candidate_tools.check_eligibility(available=available, pickup_minutes=eta,
-                                                         fastest_minutes=fastest, config=config))
+    eligible = []
+    for d, available, eta in checks:
+        with observation(tracer, "check_eligibility", as_type="tool",
+                         input={"driver_id":d.driver_id,"available":available,"road_pickup_minutes":eta,
+                                "fastest_minutes":fastest,"accepted_extra_pickup_minutes":config.accepted_extra_pickup_minutes}) as span:
+            passes = candidate_tools.check_eligibility(available=available, pickup_minutes=eta,
+                                                       fastest_minutes=fastest, config=config)
+            span.update(output={"eligible":passes})
+        if passes:
+            eligible.append(d)
+    eligible = tuple(eligible)
     updated = AgentState.model_validate({**state.model_dump(), "eligible_candidates": eligible})
     return {"eligible_candidates": updated.eligible_candidates}
 
 
-def build_graph(provider=None, config: MatchingConfig | None = None):
+def build_graph(provider=None, config: MatchingConfig | None = None, tracer=None):
     config = config if config is not None else MatchingConfig.from_env()
     def match_fastest_driver(state: AgentState):
         routable = tuple(d for d in state.eligible_candidates
@@ -32,10 +47,26 @@ def build_graph(provider=None, config: MatchingConfig | None = None):
                 verification = "offline_deterministic_demo_no_api_call"
             else:
                 try:
-                    proposal, call = provider(state.request, routable)
-                    valid = (proposal.selected_driver_id == winner.driver_id and
-                             proposal.estimated_pickup_time_minutes == winner.actual_pickup_time_minutes)
-                    verification = "model_verified" if valid else "model_overridden_by_eta_guard"
+                    with observation(tracer, "openrouter.match", as_type="generation",
+                                     model=getattr(provider, "model", None),
+                                     input=(provider.messages(state.request, routable) if hasattr(provider, "messages") else
+                                            {"request_id":state.request.request_id,
+                                             "checked_candidates":[candidate_input(d) for d in routable]})) as generation:
+                        proposal, call = provider(state.request, routable)
+                        generation.update(output=proposal.model_dump(mode="json"),
+                                          metadata={"generation_id":call.generation_id if call else None,
+                                                    "returned_model":call.returned_model if call else None,
+                                                    "client_latency_ms":call.latency_ms if call else None})
+                    with observation(tracer, "validate_model_choice", as_type="guardrail",
+                                     input={"proposed_driver_id":proposal.selected_driver_id,
+                                            "proposed_eta":proposal.estimated_pickup_time_minutes,
+                                            "expected_driver_id":winner.driver_id,
+                                            "expected_eta":winner.actual_pickup_time_minutes,
+                                            "eligible_driver_ids":[d.driver_id for d in routable]}) as guard:
+                        valid = (proposal.selected_driver_id == winner.driver_id and
+                                 proposal.estimated_pickup_time_minutes == winner.actual_pickup_time_minutes)
+                        verification = "model_verified" if valid else "model_overridden_by_eta_guard"
+                        guard.update(output={"accepted":valid,"verification":verification})
                 except Exception as exc:
                     # Safe class-only log; avoid leaking credentials or provider payloads.
                     error = f"Model call failed ({type(exc).__name__}); deterministic ETA fallback used"
@@ -75,15 +106,35 @@ def build_graph(provider=None, config: MatchingConfig | None = None):
         updated = AgentState.model_validate({**state.model_dump(), "final_match": result, "error": error})
         return {"final_match": updated.final_match, "error": updated.error}
 
+    def traced_node(name, function):
+        def invoke(state):
+            with observation(tracer, name, as_type="chain", input={"request_id":state.request.request_id}) as span:
+                update = function(state)
+                output = ({"eligible_driver_ids":[d.driver_id for d in update["eligible_candidates"]]}
+                          if "eligible_candidates" in update else
+                          {"selected_driver_id":update["final_match"].selected_driver_id,
+                           "verification":update["final_match"].verification})
+                span.update(output=output)
+                return update
+        return invoke
+
     graph = StateGraph(AgentState)
-    graph.add_node("filter_available_drivers", lambda state: filter_available_drivers(state, config))
-    graph.add_node("match_fastest_driver", match_fastest_driver)
+    graph.add_node("filter_available_drivers", traced_node("filter_available_drivers", lambda state: filter_available_drivers(state, config, tracer)))
+    graph.add_node("match_fastest_driver", traced_node("match_fastest_driver", match_fastest_driver))
     graph.add_edge(START, "filter_available_drivers")
     graph.add_edge("filter_available_drivers", "match_fastest_driver")
     graph.add_edge("match_fastest_driver", END)
     return graph.compile()
 
 
-def run_match(state: AgentState, provider=None, config: MatchingConfig | None = None):
+def run_match(state: AgentState, provider=None, config: MatchingConfig | None = None, tracer=None):
     # LangGraph output is a dict; explicitly validate final boundaries too.
-    return AgentState.model_validate(build_graph(provider, config).invoke(state))
+    config = config if config is not None else MatchingConfig.from_env()
+    if tracer is None:
+        return AgentState.model_validate(build_graph(provider, config).invoke(state))
+    with tracer.ride(state, config) as root:
+        result = AgentState.model_validate(build_graph(provider, config, tracer).invoke(state))
+        root.update(output=decision_output(result),
+                    level="WARNING" if result.final_match.selected_driver_id is None or result.error else "DEFAULT",
+                    status_message=result.final_match.verification)
+        return result

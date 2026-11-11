@@ -8,11 +8,11 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 
 - Implemented: LangGraph, Pydantic v2 validation, immutable state updates, OpenRouter integration, ETA guard, per-candidate audit, CLI, and optional FastAPI.
 - Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
-- **54 tests pass**, including pre-model pickup policy enforcement, the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
+- Current suite: **62 tests pass**, including Langfuse SDK trace boundaries, bridge audit, safe provider-error tracing and export checks. The archived Stage 2 suite had 54 passing tests.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
 - Successful live OpenRouter run and matching Activity/Logs screenshots are committed. The actual post-build Claude Code Plan Mode review is now documented below; the repository-copy launch-command screenshot and reviewer acceptance remain pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
-- Langfuse is deferred; no Langfuse tracing is claimed.
+- Stage 3 Langfuse instrumentation and export are implemented. Hosted ingestion/read-back still requires private Langfuse credentials; local SDK exports must not be mistaken for hosted traces.
 
 ## Evidence stages and source versions
 
@@ -211,6 +211,30 @@ python -m ride_matcher.validate_submission
 ```
 
 The second command regenerates the offline request audits and captured mocked prompt. Langfuse tracing is still deferred to the next stage; no new live API run is claimed.
+
+## Stage 3: Langfuse tracing and export
+
+The matching decision is unchanged. [Trace conventions](docs/langfuse-conventions.md) define one `ride.match` root per invocation, child node/tool/generation/guardrail observations, a batch session ID, request ID, full source commit, dataset hashes, real timing and canonical candidate audits. The SDK uses an always-on sampler. No-match and fallback runs remain visible.
+
+**Hosted status: pending credentials and verified read-back.** No Langfuse project keys are available in this workspace yet. Local SDK exports, if present under `evidence/stage3-local`, are explicitly local OpenTelemetry captures and do not establish hosted Langfuse ingestion. There has been no new live OpenRouter call for this stage.
+
+Keep project credentials in private, gitignored `.env`: `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and `LANGFUSE_BASE_URL` for the correct region. Do not put them in the repository or screenshots. The batch command defaults to the hosted destination and fails if credentials/authentication are missing. It checks all 20 server traces after flushing and exports only after complete observation read-back.
+
+```bash
+python -m ride_matcher.trace_batch --destination langfuse --provider-mode offline --source-commit "$(git rev-parse HEAD)" --output-dir evidence/stage3-hosted
+```
+
+`--provider-mode offline` traces deterministic graph execution without an OpenRouter call; `--provider-mode openrouter` performs real provider calls for requests with eligible drivers. The mode is stored in every trace/export. Both modes leave a trace for the unmatched request. Do not claim model generations when the mode is offline.
+
+To verify the SDK wiring without Langfuse access:
+
+```bash
+python -m ride_matcher.trace_batch --destination local --provider-mode offline --source-commit "$(git rev-parse HEAD)" --output-dir evidence/stage3-local
+```
+
+Single-request CLI runs support `--trace --source-commit FULL_SHA`. Python callers can pass `tracer=RideTracer(...)` to `run_match`; uninstrumented calls remain available for offline matching tests. The batch runner saves `traces.json`, `bridge-trace.json` and `summary.json`, each stage/commit labeled. Exports group observations by trace ID and retain replay inputs, config and decisions. Do not regenerate historical evidence in place with a newer code label.
+
+`check_bridge` verifies the actual 4-minute winner and the 16-minute alternative's detour/exclusion explanation. The SDK tests exercise all 20 roots, parent/child structure, no-match handling, exact OpenRouter messages, overridden proposals, secret-free errors, cursor pagination and incomplete-ingestion rejection. The prior 54-test artifacts remain archived Stage 2 evidence.
 
 ## Planning evidence
 

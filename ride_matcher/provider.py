@@ -21,7 +21,7 @@ class OpenRouterMatcher:
         if not self.model.endswith(":free"):
             raise ValueError("Set an available OPENROUTER_MODEL ending in :free")
 
-    def __call__(self, request, candidates):
+    def messages(self, request, candidates):
         # No offline/busy profiles or rider ID are sent to the provider.
         payload = {
             "request_id": request.request_id,
@@ -38,14 +38,18 @@ class OpenRouterMatcher:
             "Return ONLY a JSON object with selected_driver_id, estimated_pickup_time_minutes, "
             "decision_rationale. Copy the chosen ETA exactly and explain the comparison in one short line."
         )
+        return [{"role":"system", "content":system},
+                {"role":"user", "content":json.dumps(payload)}]
+
+    def __call__(self, request, candidates):
+        messages = self.messages(request, candidates)
         started = datetime.now(timezone.utc).isoformat()
         tick = time.perf_counter()
         with httpx.Client(timeout=60) as client:
             response = client.post(f"{BASE_URL}/chat/completions", headers={
                 "Authorization": f"Bearer {self.key}", "Content-Type": "application/json",
             }, json={"model": self.model, "temperature": 0, "max_tokens": 900,
-                "messages": [{"role": "system", "content": system},
-                             {"role": "user", "content": json.dumps(payload)}]})
+                "messages": messages})
         if response.is_error:
             # Do not print server response bodies, request headers, or the API key.
             raise RuntimeError(f"OpenRouter HTTP {response.status_code}; check model availability/quota")
