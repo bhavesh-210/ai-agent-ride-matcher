@@ -36,6 +36,12 @@ class ModelDecision(StrictModel):
     estimated_pickup_time_minutes: float = Field(ge=0)
     decision_rationale: str = Field(min_length=1)
 
+class TokenUsage(StrictModel):
+    input: int = Field(ge=0)
+    output: int = Field(ge=0)
+    total: int = Field(ge=0)
+
+
 class ModelCall(StrictModel):
     requested_model: str
     returned_model: str
@@ -44,6 +50,7 @@ class ModelCall(StrictModel):
     finished_at_utc: str
     latency_ms: float
     raw_content: str
+    tokens: TokenUsage | None = None
 
 class MatchResult(StrictModel):
     accepted_extra_pickup_minutes: float = Field(default=0, ge=0)

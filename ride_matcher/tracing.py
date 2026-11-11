@@ -23,8 +23,11 @@ def candidate_input(driver):
             "route_note": driver.route_note}
 
 
-def decision_output(result):
+def decision_output(result, *, latency_ms=None):
     match = result.final_match
+    call = match.model_call
+    status = ("completed" if call else "failed" if result.error else
+              "skipped_no_eligible_candidates" if match.verification == "no_candidates" else "skipped_offline")
     return {"request_id": result.request.request_id,
             "selected_driver_id": match.selected_driver_id,
             "estimated_pickup_time_minutes": match.estimated_pickup_time_minutes,
@@ -33,6 +36,13 @@ def decision_output(result):
             "accepted_extra_pickup_minutes": match.accepted_extra_pickup_minutes,
             "evaluated_candidates": [a.model_dump(mode="json") for a in match.evaluated_candidates],
             "model_proposal": match.model_proposal.model_dump(mode="json") if match.model_proposal else None,
+            "model": call.returned_model if call else None,
+            "tokens": call.tokens.model_dump() if call and call.tokens else None,
+            "model_rationale": match.model_proposal.decision_rationale if match.model_proposal else None,
+            "generation_id": call.generation_id if call else None,
+            "latency_ms": latency_ms,
+            "model_latency_ms": call.latency_ms if call else None,
+            "model_call_status": status,
             "error": result.error}
 
 

@@ -8,11 +8,11 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 
 - Implemented: LangGraph, Pydantic v2 validation, immutable state updates, OpenRouter integration, ETA guard, per-candidate audit, CLI, and optional FastAPI.
 - Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
-- Current suite: **62 tests pass**, including Langfuse SDK trace boundaries, bridge audit, safe provider-error tracing and export checks. The archived Stage 2 suite had 54 passing tests.
+- Current suite: **67 tests pass**, including real-response token parsing, required-field auditing, explicit null errors and model-generation completeness. Archived Stage 3 tests at `d218193` had 62 passing tests; Stage 2 had 54.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
 - Successful live OpenRouter run and matching Activity/Logs screenshots are committed. The actual post-build Claude Code Plan Mode review is now documented below; the repository-copy launch-command screenshot and reviewer acceptance remain pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
-- Stage 3 complete: 20 hosted Langfuse traces were read back and exported (288 observations), with the bridge explanation verified. Provider mode was offline; no new OpenRouter calls are claimed. [Hosted evidence](evidence/stage3-hosted/README.md).
+- Stage 3 historical offline-provider batch: 20 hosted traces and 288 observations verified. Reviewer follow-up requires a separate real-OpenRouter batch; that rerun is pending a fresh key (the saved key returns HTTP 401). [Historical offline-provider evidence](evidence/stage3-hosted/README.md).
 
 ## Evidence stages and source versions
 
@@ -247,6 +247,22 @@ python -m ride_matcher.trace_batch --destination local --provider-mode offline -
 Single-request CLI runs support `--trace --source-commit FULL_SHA`. Python callers can pass `tracer=RideTracer(...)` to `run_match`; uninstrumented calls remain available for offline matching tests. The batch runner saves `traces.json`, `bridge-trace.json` and `summary.json`, each stage/commit labeled. Exports group observations by trace ID and retain replay inputs, config and decisions. Do not regenerate historical evidence in place with a newer code label.
 
 `check_bridge` verifies the actual 4-minute winner and the 16-minute alternative's detour/exclusion explanation. The SDK tests exercise all 20 roots, parent/child structure, no-match handling, exact OpenRouter messages, overridden proposals, secret-free errors, cursor pagination and incomplete-ingestion rejection. The prior 54-test artifacts remain archived Stage 2 evidence.
+
+## Stage 3 reviewer follow-up: real model fields
+
+The previous 20 hosted traces are real Langfuse traces, but their `provider_mode` is `offline`. They do not prove real model usage. Their files and source commit `d218193` remain unchanged.
+
+The current implementation adds explicit root output fields `model`, `tokens` (`input`, `output`, `total`), `latency_ms` (whole graph), `model_latency_ms` (client API call), `model_rationale`, `generation_id` and `model_call_status`, while retaining `error` even when its value is null. Token counts come from OpenRouter's response usage, never estimates or placeholder zeros. The generation observation receives the returned model, usage details, actual prompt and actual structured model proposal.
+
+The exporter now requests the Langfuse API `model` and `metrics` groups as well as core/basic/time/IO/usage/trace-context fields. `audit_trace_fields` checks required-field presence separately from live-model completeness: it rejects missing native generation usage/model columns, missing token values, failed calls and unverified proposals. A successful explicit `error: null` is valid. The unmatched request still gets a trace, `model_call_status: skipped_no_eligible_candidates`, and explicit null model/token fields; it must not get a fabricated model call.
+
+**Pre-change field check:** auditing the previously server-exported offline batch found **20 traces missing required fields**: `model`, `tokens`, `latency_ms`, `model_rationale` and `model_call_status`. This is the actual result, not an empty-list claim.
+
+**Live rerun / final field-audit status: pending fresh OpenRouter key.** The saved key returned HTTP 401 during the read-only authentication check. No new live batch or empty missing-field result is claimed yet. Once the live run completes, its server-exported `field-audit.json` will give the exact missing-field list and incomplete-model list; the CLI exits unsuccessfully if either is nonempty.
+
+**Bridge field review:** no new bridge-specific explanation field was needed. The original hosted bridge trace already had `output.evaluated_candidates[*].reason`, including the 16-minute driver's exclusion and Burnside Bridge route note, plus `output.decision_rationale` for the 4-minute winner. Those existing fields already explained the bridge decision. `model_rationale` is a new general field for the real model's own reason, distinct from the canonical code audit.
+
+The fresh source revision will be committed before the real batch so every trace records the code actually executed. The new batch will be stored separately, never overwrite the historical offline or local exports, and will make 19 real model calls plus one explicit no-candidate skip.
 
 ## Planning evidence
 

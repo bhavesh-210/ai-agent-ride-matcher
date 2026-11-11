@@ -137,7 +137,7 @@ def test_generation_records_exact_openrouter_messages(tracing, monkeypatch):
     original=httpx.Client
     def handler(request):
         sent.extend(json.loads(request.content)['messages'])
-        return httpx.Response(200,json={'id':'mock-generation','model':'mock:free','choices':[{'message':{'content':json.dumps({'selected_driver_id':'DRV-16643','estimated_pickup_time_minutes':4,'decision_rationale':'Four beats sixteen'})}}]})
+        return httpx.Response(200,json={'id':'mock-generation','model':'mock:free','usage':{'prompt_tokens':100,'completion_tokens':20,'total_tokens':120},'choices':[{'message':{'content':json.dumps({'selected_driver_id':'DRV-16643','estimated_pickup_time_minutes':4,'decision_rationale':'Four beats sixteen'})}}]})
     monkeypatch.setattr(httpx,'Client',lambda **kwargs: original(transport=httpx.MockTransport(handler),**kwargs))
     run_match(bridge_state(),OpenRouterMatcher(),tracer=tracer)
     tracer.client.flush()
@@ -146,3 +146,10 @@ def test_generation_records_exact_openrouter_messages(tracing, monkeypatch):
     assert generation['input']==sent
     assert 'mock-only-key' not in json.dumps(rows)
     assert generation['attributes']['langfuse.observation.model.name']=='mock:free'
+    root=next(r for r in rows if r['name']=='ride.match')
+    assert root['output']['tokens']=={'input':100,'output':20,'total':120}
+    assert root['output']['model']=='mock:free'
+    assert root['output']['model_rationale']=='Four beats sixteen'
+    assert root['output']['latency_ms']>=0
+    assert 'error' in root['output'] and root['output']['error'] is None
+    assert json.loads(generation['attributes']['langfuse.observation.usage_details'])=={'input':100,'output':20,'total':120}

@@ -27,3 +27,9 @@ Official references consulted:
 - [Export one trace through observations](https://langfuse.com/faq/all/export-single-trace-or-session)
 
 This document describes conventions, not proof of a hosted run. The exported evidence's destination and `hosted_read_verified` fields establish which execution actually happened.
+
+## Reviewer-required real-model field contract
+
+Every root output includes model, token usage, whole-graph latency, the model rationale, model-call status and an explicit error key (null for success). Actual response token counts are also sent as native generation usage details. Export includes `model` and `metrics` API groups. `field-audit.json` separates absent keys from incomplete live-model values; the skipped no-candidate trace keeps null values rather than inventing a generation. The historical offline batch does not satisfy the live-model requirement.
+
+No bridge-specific explanation field was added during review: `output.evaluated_candidates[*].reason` already contains the exclusion and detour note, and `output.decision_rationale` explains the winner. New `model_rationale` records the live model's separate reasoning.

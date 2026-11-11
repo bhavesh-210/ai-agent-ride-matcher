@@ -1,4 +1,5 @@
 from langgraph.graph import StateGraph, START, END
+import time
 from .models import AgentState, CandidateAudit, MatchResult
 from .config import MatchingConfig
 from . import tools as candidate_tools
@@ -57,6 +58,9 @@ def build_graph(provider=None, config: MatchingConfig | None = None, tracer=None
                                           metadata={"generation_id":call.generation_id if call else None,
                                                     "returned_model":call.returned_model if call else None,
                                                     "client_latency_ms":call.latency_ms if call else None})
+                        if call:
+                            generation.update(model=call.returned_model,
+                                              usage_details=call.tokens.model_dump() if call.tokens else None)
                     with observation(tracer, "validate_model_choice", as_type="guardrail",
                                      input={"proposed_driver_id":proposal.selected_driver_id,
                                             "proposed_eta":proposal.estimated_pickup_time_minutes,
@@ -133,8 +137,9 @@ def run_match(state: AgentState, provider=None, config: MatchingConfig | None = 
     if tracer is None:
         return AgentState.model_validate(build_graph(provider, config).invoke(state))
     with tracer.ride(state, config) as root:
+        started = time.perf_counter()
         result = AgentState.model_validate(build_graph(provider, config, tracer).invoke(state))
-        root.update(output=decision_output(result),
+        root.update(output=decision_output(result, latency_ms=round((time.perf_counter()-started)*1000, 3)),
                     level="WARNING" if result.final_match.selected_driver_id is None or result.error else "DEFAULT",
                     status_message=result.final_match.verification)
         return result

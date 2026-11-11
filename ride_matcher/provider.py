@@ -3,7 +3,7 @@ import os
 import time
 from datetime import datetime, timezone
 import httpx
-from .models import ModelCall, ModelDecision
+from .models import ModelCall, ModelDecision, TokenUsage
 
 BASE_URL = "https://openrouter.ai/api/v1"
 
@@ -61,8 +61,13 @@ class OpenRouterMatcher:
         if cleaned.startswith("```") and cleaned.endswith("```"):
             cleaned = "\n".join(cleaned.splitlines()[1:-1])
         decision = ModelDecision.model_validate_json(cleaned)
+        usage = body.get("usage") or {}
+        # Never estimate tokens from string length or substitute invented zeros.
+        tokens = (TokenUsage(input=usage["prompt_tokens"], output=usage["completion_tokens"],
+                             total=usage["total_tokens"])
+                  if all(k in usage for k in ("prompt_tokens", "completion_tokens", "total_tokens")) else None)
         call = ModelCall(requested_model=self.model, returned_model=body["model"],
             generation_id=body["id"], started_at_utc=started,
             finished_at_utc=datetime.now(timezone.utc).isoformat(),
-            latency_ms=round((time.perf_counter() - tick) * 1000, 2), raw_content=content)
+            latency_ms=round((time.perf_counter() - tick) * 1000, 2), raw_content=content, tokens=tokens)
         return decision, call

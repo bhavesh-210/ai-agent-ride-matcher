@@ -13,6 +13,7 @@ from .graph import run_match
 from .models import AgentState
 from .provider import OpenRouterMatcher
 from .tracing import RideTracer, local_tracer
+from .trace_audit import audit_trace_fields
 
 
 def decode(value):
@@ -48,7 +49,8 @@ def read_hosted_trace(client, trace_id, *, start, end, expected_count, timeout=9
         seen_cursors = set()
         rows = []
         while True:
-            response = client.api.observations.get_many(trace_id=trace_id, fields="core,basic,io,usage",
+            response = client.api.observations.get_many(trace_id=trace_id,
+                fields="core,basic,time,io,model,usage,metrics,trace_context",
                 from_start_time=start, to_start_time=end, limit=1000, cursor=cursor)
             rows.extend(row.model_dump(mode="json", by_alias=True) for row in response.data)
             cursor = response.meta.cursor
@@ -130,12 +132,17 @@ def run_batch(*, destination, provider_mode, source_commit, output_dir, session_
                   "exported_at_utc":datetime.now(timezone.utc).isoformat(),
                   "format":"langfuse-observations-v2-grouped-by-trace" if destination=="langfuse" else "local-langfuse-sdk-otel-export-not-hosted"}
         export=assemble_export(tracer.trace_ids,observations,evidence)
+        field_audit=audit_trace_fields(export)
         assert export["trace_count"]==20
         bridge=check_bridge(export)
         output=Path(output_dir); output.mkdir(parents=True,exist_ok=True)
         (output/'traces.json').write_text(json.dumps(export,indent=2)+'\n')
         (output/'bridge-trace.json').write_text(json.dumps(bridge,indent=2)+'\n')
+        (output/'field-audit.json').write_text(json.dumps(field_audit,indent=2)+'\n')
         summary={"_evidence":evidence,"trace_count":20,"bridge_check":"passed",
+                 "missing_required_fields":field_audit["missing_required_fields"],
+                 "incomplete_model_traces":field_audit["incomplete_model_traces"],
+                 "model_call_trace_count":field_audit["model_call_trace_count"],
                  "matched":sum(t["output"]["selected_driver_id"] is not None for t in export["traces"]),
                  "no_match_requests":[t["request_id"] for t in export["traces"] if t["output"]["selected_driver_id"] is None]}
         (output/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
@@ -154,8 +161,11 @@ def main():
     args=parser.parse_args()
     if args.destination=='local' and args.output_dir=='evidence/stage3-hosted':
         parser.error('Local exports require an explicit output directory separate from hosted evidence')
-    print(json.dumps(run_batch(destination=args.destination,provider_mode=args.provider_mode,
-                              source_commit=args.source_commit,output_dir=args.output_dir),indent=2))
+    summary=run_batch(destination=args.destination,provider_mode=args.provider_mode,
+                      source_commit=args.source_commit,output_dir=args.output_dir)
+    print(json.dumps(summary,indent=2))
+    if summary["missing_required_fields"] or summary["incomplete_model_traces"]:
+        raise SystemExit("Trace field audit failed; inspect saved audit before submission")
 
 
 if __name__=='__main__':
