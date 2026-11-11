@@ -1,0 +1,11 @@
+{
+  "stage": "stage-3-tracing",
+  "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+  "commit_role": "instrumented_source_revision",
+  "destination": "local",
+  "hosted_read_verified": false,
+  "provider_mode": "offline",
+  "test_count": 62,
+  "artifact": "evidence/stage3-local/pytest.txt",
+  "sha256": "8dfc8aabe92e6f98f71d9349c0f8785f0f2be39bd95e40ec4b904c2163a18be7"
+}

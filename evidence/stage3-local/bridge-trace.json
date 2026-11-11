@@ -1,0 +1,675 @@
+{
+  "_evidence": {
+    "stage": "stage-3-tracing",
+    "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+    "commit_role": "instrumented_source_revision",
+    "destination": "local",
+    "hosted_read_verified": false,
+    "provider_mode": "offline",
+    "session_id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+    "dataset_sha256": {
+      "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+      "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+    },
+    "exported_at_utc": "2026-11-11T13:18:01.544606+00:00",
+    "format": "local-langfuse-sdk-otel-export-not-hosted"
+  },
+  "request_id": "RQ-0303-002",
+  "trace_id": "22f7cb1ba54f2d233d871e26a533a6b8",
+  "input": {
+    "request_id": "RQ-0303-002",
+    "candidates": [
+      {
+        "driver_id": "DRV-38214",
+        "status": "offline",
+        "straight_line_distance_km": 0.87,
+        "road_pickup_minutes": 14.0,
+        "route_note": "Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+      },
+      {
+        "driver_id": "DRV-52907",
+        "status": "available",
+        "straight_line_distance_km": 1.03,
+        "road_pickup_minutes": 16.0,
+        "route_note": "Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+      },
+      {
+        "driver_id": "DRV-16643",
+        "status": "available",
+        "straight_line_distance_km": 1.14,
+        "road_pickup_minutes": 4.0,
+        "route_note": "Same bank direct via SE Grand Ave"
+      },
+      {
+        "driver_id": "DRV-29571",
+        "status": "on_trip",
+        "straight_line_distance_km": 1.4,
+        "road_pickup_minutes": 6.0,
+        "route_note": ""
+      }
+    ]
+  },
+  "output": {
+    "request_id": "RQ-0303-002",
+    "selected_driver_id": "DRV-16643",
+    "estimated_pickup_time_minutes": 4.0,
+    "decision_rationale": "Selected DRV-16643: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+    "verification": "offline_deterministic_demo_no_api_call",
+    "accepted_extra_pickup_minutes": 0.0,
+    "evaluated_candidates": [
+      {
+        "driver_id": "DRV-38214",
+        "status": "offline",
+        "straight_line_distance_km": 0.87,
+        "road_eta_minutes": 14.0,
+        "outcome": "excluded",
+        "reason": "Status offline; removed before model call. Snapshot route note: Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+      },
+      {
+        "driver_id": "DRV-52907",
+        "status": "available",
+        "straight_line_distance_km": 1.03,
+        "road_eta_minutes": 16.0,
+        "outcome": "excluded",
+        "reason": "Road ETA exceeds fastest available route by more than the configured 0 extra pickup minutes; removed before model call. Snapshot route note: Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+      },
+      {
+        "driver_id": "DRV-16643",
+        "status": "available",
+        "straight_line_distance_km": 1.14,
+        "road_eta_minutes": 4.0,
+        "outcome": "selected",
+        "reason": "Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via SE Grand Ave"
+      },
+      {
+        "driver_id": "DRV-29571",
+        "status": "on_trip",
+        "straight_line_distance_km": 1.4,
+        "road_eta_minutes": 6.0,
+        "outcome": "excluded",
+        "reason": "Status on_trip; removed before model call."
+      }
+    ],
+    "model_proposal": null,
+    "error": null
+  },
+  "observations": [
+    {
+      "id": "ae1ee2b7fc902678",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_availability",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.392506+00:00",
+      "endTime": "2026-11-11T13:18:01.392638+00:00",
+      "input": {
+        "driver_id": "DRV-38214",
+        "status": "offline"
+      },
+      "output": {
+        "available": false
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-38214\", \"status\": \"offline\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"available\": false}"
+      }
+    },
+    {
+      "id": "2522afdb1ae7757c",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "estimate_pickup_time",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.392712+00:00",
+      "endTime": "2026-11-11T13:18:01.392830+00:00",
+      "input": {
+        "driver_id": "DRV-38214",
+        "route_note": "Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+      },
+      "output": {
+        "road_pickup_minutes": 14.0,
+        "source": "snapshot"
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-38214\", \"route_note\": \"Detour via one-way bridge ramp inbound only; loop via Burnside Bridge\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"road_pickup_minutes\": 14.0, \"source\": \"snapshot\"}"
+      }
+    },
+    {
+      "id": "bf90a06ec1c40107",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_availability",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.392868+00:00",
+      "endTime": "2026-11-11T13:18:01.392969+00:00",
+      "input": {
+        "driver_id": "DRV-52907",
+        "status": "available"
+      },
+      "output": {
+        "available": true
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-52907\", \"status\": \"available\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"available\": true}"
+      }
+    },
+    {
+      "id": "c2dfc656654f5d82",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "estimate_pickup_time",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.393036+00:00",
+      "endTime": "2026-11-11T13:18:01.393312+00:00",
+      "input": {
+        "driver_id": "DRV-52907",
+        "route_note": "Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+      },
+      "output": {
+        "road_pickup_minutes": 16.0,
+        "source": "snapshot"
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-52907\", \"route_note\": \"Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"road_pickup_minutes\": 16.0, \"source\": \"snapshot\"}"
+      }
+    },
+    {
+      "id": "de7a86f853e8b971",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_availability",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.393360+00:00",
+      "endTime": "2026-11-11T13:18:01.393478+00:00",
+      "input": {
+        "driver_id": "DRV-16643",
+        "status": "available"
+      },
+      "output": {
+        "available": true
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-16643\", \"status\": \"available\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"available\": true}"
+      }
+    },
+    {
+      "id": "6df2a587f10f3ca7",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "estimate_pickup_time",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.393515+00:00",
+      "endTime": "2026-11-11T13:18:01.393620+00:00",
+      "input": {
+        "driver_id": "DRV-16643",
+        "route_note": "Same bank direct via SE Grand Ave"
+      },
+      "output": {
+        "road_pickup_minutes": 4.0,
+        "source": "snapshot"
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-16643\", \"route_note\": \"Same bank direct via SE Grand Ave\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"road_pickup_minutes\": 4.0, \"source\": \"snapshot\"}"
+      }
+    },
+    {
+      "id": "2574423777d0ef1d",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_availability",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.393655+00:00",
+      "endTime": "2026-11-11T13:18:01.393783+00:00",
+      "input": {
+        "driver_id": "DRV-29571",
+        "status": "on_trip"
+      },
+      "output": {
+        "available": false
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-29571\", \"status\": \"on_trip\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"available\": false}"
+      }
+    },
+    {
+      "id": "cb78912a9caf7a88",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "estimate_pickup_time",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.393815+00:00",
+      "endTime": "2026-11-11T13:18:01.393912+00:00",
+      "input": {
+        "driver_id": "DRV-29571",
+        "route_note": ""
+      },
+      "output": {
+        "road_pickup_minutes": 6.0,
+        "source": "snapshot"
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-29571\", \"route_note\": \"\"}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"road_pickup_minutes\": 6.0, \"source\": \"snapshot\"}"
+      }
+    },
+    {
+      "id": "bf16b0b518a4d2a7",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_eligibility",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.393947+00:00",
+      "endTime": "2026-11-11T13:18:01.394051+00:00",
+      "input": {
+        "driver_id": "DRV-38214",
+        "available": false,
+        "road_pickup_minutes": 14.0,
+        "fastest_minutes": 4.0,
+        "accepted_extra_pickup_minutes": 0.0
+      },
+      "output": {
+        "eligible": false
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-38214\", \"available\": false, \"road_pickup_minutes\": 14.0, \"fastest_minutes\": 4.0, \"accepted_extra_pickup_minutes\": 0.0}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"eligible\": false}"
+      }
+    },
+    {
+      "id": "b1c8c1dbfd6e2558",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_eligibility",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.394085+00:00",
+      "endTime": "2026-11-11T13:18:01.394252+00:00",
+      "input": {
+        "driver_id": "DRV-52907",
+        "available": true,
+        "road_pickup_minutes": 16.0,
+        "fastest_minutes": 4.0,
+        "accepted_extra_pickup_minutes": 0.0
+      },
+      "output": {
+        "eligible": false
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-52907\", \"available\": true, \"road_pickup_minutes\": 16.0, \"fastest_minutes\": 4.0, \"accepted_extra_pickup_minutes\": 0.0}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"eligible\": false}"
+      }
+    },
+    {
+      "id": "4bef7612f3f21580",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_eligibility",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.394294+00:00",
+      "endTime": "2026-11-11T13:18:01.394426+00:00",
+      "input": {
+        "driver_id": "DRV-16643",
+        "available": true,
+        "road_pickup_minutes": 4.0,
+        "fastest_minutes": 4.0,
+        "accepted_extra_pickup_minutes": 0.0
+      },
+      "output": {
+        "eligible": true
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-16643\", \"available\": true, \"road_pickup_minutes\": 4.0, \"fastest_minutes\": 4.0, \"accepted_extra_pickup_minutes\": 0.0}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"eligible\": true}"
+      }
+    },
+    {
+      "id": "2fa2dc755a88f690",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "0161fb40dca690da",
+      "name": "check_eligibility",
+      "type": "tool",
+      "startTime": "2026-11-11T13:18:01.394461+00:00",
+      "endTime": "2026-11-11T13:18:01.394589+00:00",
+      "input": {
+        "driver_id": "DRV-29571",
+        "available": false,
+        "road_pickup_minutes": 6.0,
+        "fastest_minutes": 4.0,
+        "accepted_extra_pickup_minutes": 0.0
+      },
+      "output": {
+        "eligible": false
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"driver_id\": \"DRV-29571\", \"available\": false, \"road_pickup_minutes\": 6.0, \"fastest_minutes\": 4.0, \"accepted_extra_pickup_minutes\": 0.0}",
+        "langfuse.observation.type": "tool",
+        "langfuse.observation.output": "{\"eligible\": false}"
+      }
+    },
+    {
+      "id": "0161fb40dca690da",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "9ec24abdbc5e3716",
+      "name": "filter_available_drivers",
+      "type": "chain",
+      "startTime": "2026-11-11T13:18:01.392264+00:00",
+      "endTime": "2026-11-11T13:18:01.394731+00:00",
+      "input": {
+        "request_id": "RQ-0303-002"
+      },
+      "output": {
+        "eligible_driver_ids": [
+          "DRV-16643"
+        ]
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"request_id\": \"RQ-0303-002\"}",
+        "langfuse.observation.type": "chain",
+        "langfuse.observation.output": "{\"eligible_driver_ids\": [\"DRV-16643\"]}"
+      }
+    },
+    {
+      "id": "34c207568854af5f",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": "9ec24abdbc5e3716",
+      "name": "match_fastest_driver",
+      "type": "chain",
+      "startTime": "2026-11-11T13:18:01.395264+00:00",
+      "endTime": "2026-11-11T13:18:01.395618+00:00",
+      "input": {
+        "request_id": "RQ-0303-002"
+      },
+      "output": {
+        "selected_driver_id": "DRV-16643",
+        "verification": "offline_deterministic_demo_no_api_call"
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"request_id\": \"RQ-0303-002\"}",
+        "langfuse.observation.type": "chain",
+        "langfuse.observation.output": "{\"selected_driver_id\": \"DRV-16643\", \"verification\": \"offline_deterministic_demo_no_api_call\"}"
+      }
+    },
+    {
+      "id": "9ec24abdbc5e3716",
+      "traceId": "22f7cb1ba54f2d233d871e26a533a6b8",
+      "parentObservationId": null,
+      "name": "ride.match",
+      "type": "agent",
+      "startTime": "2026-11-11T13:18:01.389965+00:00",
+      "endTime": "2026-11-11T13:18:01.396066+00:00",
+      "input": {
+        "request_id": "RQ-0303-002",
+        "candidates": [
+          {
+            "driver_id": "DRV-38214",
+            "status": "offline",
+            "straight_line_distance_km": 0.87,
+            "road_pickup_minutes": 14.0,
+            "route_note": "Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+          },
+          {
+            "driver_id": "DRV-52907",
+            "status": "available",
+            "straight_line_distance_km": 1.03,
+            "road_pickup_minutes": 16.0,
+            "route_note": "Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+          },
+          {
+            "driver_id": "DRV-16643",
+            "status": "available",
+            "straight_line_distance_km": 1.14,
+            "road_pickup_minutes": 4.0,
+            "route_note": "Same bank direct via SE Grand Ave"
+          },
+          {
+            "driver_id": "DRV-29571",
+            "status": "on_trip",
+            "straight_line_distance_km": 1.4,
+            "road_pickup_minutes": 6.0,
+            "route_note": ""
+          }
+        ]
+      },
+      "output": {
+        "request_id": "RQ-0303-002",
+        "selected_driver_id": "DRV-16643",
+        "estimated_pickup_time_minutes": 4.0,
+        "decision_rationale": "Selected DRV-16643: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.",
+        "verification": "offline_deterministic_demo_no_api_call",
+        "accepted_extra_pickup_minutes": 0.0,
+        "evaluated_candidates": [
+          {
+            "driver_id": "DRV-38214",
+            "status": "offline",
+            "straight_line_distance_km": 0.87,
+            "road_eta_minutes": 14.0,
+            "outcome": "excluded",
+            "reason": "Status offline; removed before model call. Snapshot route note: Detour via one-way bridge ramp inbound only; loop via Burnside Bridge"
+          },
+          {
+            "driver_id": "DRV-52907",
+            "status": "available",
+            "straight_line_distance_km": 1.03,
+            "road_eta_minutes": 16.0,
+            "outcome": "excluded",
+            "reason": "Road ETA exceeds fastest available route by more than the configured 0 extra pickup minutes; removed before model call. Snapshot route note: Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge"
+          },
+          {
+            "driver_id": "DRV-16643",
+            "status": "available",
+            "straight_line_distance_km": 1.14,
+            "road_eta_minutes": 4.0,
+            "outcome": "selected",
+            "reason": "Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via SE Grand Ave"
+          },
+          {
+            "driver_id": "DRV-29571",
+            "status": "on_trip",
+            "straight_line_distance_km": 1.4,
+            "road_eta_minutes": 6.0,
+            "outcome": "excluded",
+            "reason": "Status on_trip; removed before model call."
+          }
+        ],
+        "model_proposal": null,
+        "error": null
+      },
+      "attributes": {
+        "session.id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+        "langfuse.trace.metadata.request_id": "RQ-0303-002",
+        "langfuse.trace.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.trace.tags": [
+          "ride-matcher",
+          "stage-3",
+          "offline"
+        ],
+        "langfuse.trace.name": "ride.match",
+        "langfuse.internal.is_app_root": true,
+        "langfuse.environment": "local-test",
+        "langfuse.release": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.version": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.input": "{\"request_id\": \"RQ-0303-002\", \"candidates\": [{\"driver_id\": \"DRV-38214\", \"status\": \"offline\", \"straight_line_distance_km\": 0.87, \"road_pickup_minutes\": 14.0, \"route_note\": \"Detour via one-way bridge ramp inbound only; loop via Burnside Bridge\"}, {\"driver_id\": \"DRV-52907\", \"status\": \"available\", \"straight_line_distance_km\": 1.03, \"road_pickup_minutes\": 16.0, \"route_note\": \"Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge\"}, {\"driver_id\": \"DRV-16643\", \"status\": \"available\", \"straight_line_distance_km\": 1.14, \"road_pickup_minutes\": 4.0, \"route_note\": \"Same bank direct via SE Grand Ave\"}, {\"driver_id\": \"DRV-29571\", \"status\": \"on_trip\", \"straight_line_distance_km\": 1.4, \"road_pickup_minutes\": 6.0, \"route_note\": \"\"}]}",
+        "langfuse.observation.metadata.request_id": "RQ-0303-002",
+        "langfuse.observation.metadata.stage": "stage-3-tracing",
+        "langfuse.observation.metadata.source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+        "langfuse.observation.metadata.provider_mode": "offline",
+        "langfuse.observation.metadata.accepted_extra_pickup_minutes": "0.0",
+        "langfuse.observation.metadata.dataset_sha256": "{\"requests\": \"0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843\", \"drivers\": \"c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02\"}",
+        "langfuse.observation.type": "agent",
+        "langfuse.observation.level": "DEFAULT",
+        "langfuse.observation.status_message": "offline_deterministic_demo_no_api_call",
+        "langfuse.observation.output": "{\"request_id\": \"RQ-0303-002\", \"selected_driver_id\": \"DRV-16643\", \"estimated_pickup_time_minutes\": 4.0, \"decision_rationale\": \"Selected DRV-16643: minimum supplied road ETA 4 minutes among available routable drivers. Straight-line distance is not a ranking input. ETA is an estimate from the snapshot.\", \"verification\": \"offline_deterministic_demo_no_api_call\", \"accepted_extra_pickup_minutes\": 0.0, \"evaluated_candidates\": [{\"driver_id\": \"DRV-38214\", \"status\": \"offline\", \"straight_line_distance_km\": 0.87, \"road_eta_minutes\": 14.0, \"outcome\": \"excluded\", \"reason\": \"Status offline; removed before model call. Snapshot route note: Detour via one-way bridge ramp inbound only; loop via Burnside Bridge\"}, {\"driver_id\": \"DRV-52907\", \"status\": \"available\", \"straight_line_distance_km\": 1.03, \"road_eta_minutes\": 16.0, \"outcome\": \"excluded\", \"reason\": \"Road ETA exceeds fastest available route by more than the configured 0 extra pickup minutes; removed before model call. Snapshot route note: Morrison Bridge eastbound ramp not reachable from SW Naito; detour via Burnside Bridge\"}, {\"driver_id\": \"DRV-16643\", \"status\": \"available\", \"straight_line_distance_km\": 1.14, \"road_eta_minutes\": 4.0, \"outcome\": \"selected\", \"reason\": \"Lowest road ETA; equal ETA ties use driver_id ascending. Snapshot route note: Same bank direct via SE Grand Ave\"}, {\"driver_id\": \"DRV-29571\", \"status\": \"on_trip\", \"straight_line_distance_km\": 1.4, \"road_eta_minutes\": 6.0, \"outcome\": \"excluded\", \"reason\": \"Status on_trip; removed before model call.\"}], \"model_proposal\": null, \"error\": null}"
+      }
+    }
+  ]
+}

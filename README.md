@@ -26,7 +26,7 @@ Every evidence artifact now has a stage label and full commit: JSON files contai
 | 54 tests pass; 20 requests evaluated, 19 matches and one source-ID no-match | Stage 2, three tools, `7870006` | [Actual pytest output](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-final-pytest.txt) and [request audit](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-request-validation.json) |
 | Post-build Ollama planning review; visible times only | Stage 1, post-build review, `40602ce` | [Planning evidence and limitations](https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/40602ceab0681b52ce1c65faac96f0b636f5ebcc/evidence/planning-review.md) |
 
-The Stage 1 live run does **not** prove Stage 2 pre-model threshold filtering. Stage 2 prompt/test evidence is mocked/offline; it does **not** represent another live OpenRouter call. The current matching implementation is the tested `7870006` version; this evidence-labeling update does not change matcher behavior.
+The Stage 1 live run does **not** prove Stage 2 pre-model threshold filtering. Stage 2 prompt/test evidence is mocked/offline; it does **not** represent another live OpenRouter call. That evidence-labeling update catalogued the tested `7870006` matching version. Stage 3 adds tracing at `d218193` while retaining the same matching policy.
 
 ## Install and verify
 
@@ -212,9 +212,11 @@ python -m ride_matcher.validate_submission
 
 The second command regenerates the offline request audits and captured mocked prompt. Langfuse tracing is still deferred to the next stage; no new live API run is claimed.
 
-## Stage 3: Langfuse tracing and export
+## Stage 3: Langfuse tracing and export — source `d218193`
 
 The matching decision is unchanged. [Trace conventions](docs/langfuse-conventions.md) define one `ride.match` root per invocation, child node/tool/generation/guardrail observations, a batch session ID, request ID, full source commit, dataset hashes, real timing and canonical candidate audits. The SDK uses an always-on sampler. No-match and fallback runs remain visible.
+
+[Instrumented source commit](https://github.com/bhavesh-210/ai-agent-ride-matcher/commit/d218193fa5bcbe199ff47c4cf19926d02d70dc96). [Local SDK export status and artifacts](evidence/stage3-local/README.md): **20 distinct traces, 288 observations, bridge check passed, 62 tests passed**. [Test output](evidence/stage3-local/pytest.txt) and [summary](evidence/stage3-local/summary.json) carry that source revision. These results are local, not hosted.
 
 **Hosted status: pending credentials and verified read-back.** No Langfuse project keys are available in this workspace yet. Local SDK exports, if present under `evidence/stage3-local`, are explicitly local OpenTelemetry captures and do not establish hosted Langfuse ingestion. There has been no new live OpenRouter call for this stage.
 
@@ -293,4 +295,4 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 
 Before any local commit, `git check-ignore .env` should print `.env`, and `git ls-files .env` should print nothing. Never commit an API key. The included `.env.example` contains no credentials.
 
-Validation: 54 tests pass locally on Python 3.12 with the committed assignment CSVs. Tests include synthetic and actual bridge cases, pre-model pickup allowance, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.
+Archived Stage 2 validation at `7870006`: 54 tests passed on Python 3.12 with the committed assignment CSVs. Current Stage 3 validation at `d218193`: 62 tests pass; see the local SDK test artifact above. Tests include synthetic and actual bridge cases, pre-model pickup allowance, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.

@@ -1,8 +1,8 @@
 {
   "_evidence": {
     "stage": "evidence-provenance-index",
-    "commit": "78700065daf4b1be83980799a1944664825a8906",
-    "commit_role": "source_revision_being_catalogued",
+    "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+    "commit_role": "latest_instrumented_source_catalogued",
     "provenance_basis": "Artifact revisions derived from Git history; see per-file execution limitations."
   },
   "conventions": {
@@ -211,6 +211,46 @@
       "original_sha256_before_label": "4b636797913ad28d1e453025e782d17f49f3a4801b1805901ca294bc28e78e46",
       "evidence_mode": "offline-validation",
       "archived_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/blob/78700065daf4b1be83980799a1944664825a8906/evidence/stage2-second-pytest.txt"
+    },
+    {
+      "artifact": "evidence/stage3-local/README.md",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "stage and commit in document header",
+      "sha256": "6b7ad05f52db19910ad7878c1c3a5ef7cd2516150483649b78ee4deb9d7e2077",
+      "evidence_mode": "local-langfuse-sdk-no-hosted-upload"
+    },
+    {
+      "artifact": "evidence/stage3-local/bridge-trace.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-local/bridge-trace.json#_evidence",
+      "sha256": "5946639f16cbe56860d7feed4547c8f9a83993059235b9b62ed1a9ba73ddb561",
+      "evidence_mode": "local-langfuse-sdk-no-hosted-upload"
+    },
+    {
+      "artifact": "evidence/stage3-local/pytest.txt",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-local/pytest.txt.metadata.json",
+      "sha256": "8dfc8aabe92e6f98f71d9349c0f8785f0f2be39bd95e40ec4b904c2163a18be7",
+      "evidence_mode": "local-langfuse-sdk-no-hosted-upload"
+    },
+    {
+      "artifact": "evidence/stage3-local/summary.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-local/summary.json#_evidence",
+      "sha256": "e5e6a4256017f2faeb8cecc7cca35d93a9631c7f27dafdadaaf3db7652072d4d",
+      "evidence_mode": "local-langfuse-sdk-no-hosted-upload"
+    },
+    {
+      "artifact": "evidence/stage3-local/traces.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-local/traces.json#_evidence",
+      "sha256": "91963503be33c94873baeb8c04dc0728e29a921395a1afd868bcf0fd5d1eec72",
+      "evidence_mode": "local-langfuse-sdk-no-hosted-upload"
     }
   ]
 }

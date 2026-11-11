@@ -1,0 +1,23 @@
+{
+  "_evidence": {
+    "stage": "stage-3-tracing",
+    "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+    "commit_role": "instrumented_source_revision",
+    "destination": "local",
+    "hosted_read_verified": false,
+    "provider_mode": "offline",
+    "session_id": "ride-matcher-835e7828b5e141a983ac1531259746fa",
+    "dataset_sha256": {
+      "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+      "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+    },
+    "exported_at_utc": "2026-11-11T13:18:01.544606+00:00",
+    "format": "local-langfuse-sdk-otel-export-not-hosted"
+  },
+  "trace_count": 20,
+  "bridge_check": "passed",
+  "matched": 19,
+  "no_match_requests": [
+    "RQ-0308-018"
+  ]
+}
