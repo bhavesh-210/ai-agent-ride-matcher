@@ -1,0 +1,261 @@
+{
+  "_evidence": {
+    "stage": "stage-3-tracing",
+    "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+    "commit_role": "instrumented_source_revision",
+    "destination": "langfuse",
+    "hosted_read_verified": true,
+    "provider_mode": "offline",
+    "session_id": "ride-matcher-861a725a2f4142f88399c5e937c96891",
+    "dataset_sha256": {
+      "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+      "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+    },
+    "exported_at_utc": "2026-11-11T13:28:01.036341+00:00",
+    "format": "langfuse-observations-v2-grouped-by-trace"
+  },
+  "required_output_fields": [
+    "request_id",
+    "selected_driver_id",
+    "estimated_pickup_time_minutes",
+    "decision_rationale",
+    "evaluated_candidates",
+    "model",
+    "tokens",
+    "latency_ms",
+    "model_rationale",
+    "error",
+    "model_call_status"
+  ],
+  "trace_count": 20,
+  "missing_required_fields": [
+    {
+      "request_id": "RQ-0303-001",
+      "trace_id": "b91d79f972eee0bb9b65574904d8e352",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0303-002",
+      "trace_id": "2079c2fdd069cafe983dac043f7d902b",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0303-003",
+      "trace_id": "ea0a3c4ae5c2d6bebff774b4db7e1971",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0304-004",
+      "trace_id": "670f20654d79c836e183205fee19091c",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0304-005",
+      "trace_id": "690184d971245bea67ef1b603cb3eb68",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0304-006",
+      "trace_id": "954c6f4d17489713918115a898eae500",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0305-007",
+      "trace_id": "c6b55712db4d9f7517f0ac13fd2169d3",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0305-008",
+      "trace_id": "c03986d111a2d1b7e2ec989949e3ec8a",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0305-009",
+      "trace_id": "b95c81a174e68f53df01f1c08df5255f",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0306-010",
+      "trace_id": "13be1436f8f1f85631537d066e1a76f2",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0306-011",
+      "trace_id": "3074f2d30d0ccff867278367bac76e4d",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0306-012",
+      "trace_id": "328cc60ee32633d2f31e0f1ac3ad299b",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0307-013",
+      "trace_id": "fc4b195d86adb7f3742e84573b8fc45d",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0307-014",
+      "trace_id": "1279a79752d8a5952c4e62f1a96d4517",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0307-015",
+      "trace_id": "aca902262206d7dea2c4fc5b6588bb9f",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0308-016",
+      "trace_id": "21f437be2b42d7c388ee7f390e72cdef",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0308-017",
+      "trace_id": "abeecf576f1cff37bfb9c3045442a83e",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0308-018",
+      "trace_id": "57725c1ffceea3017710cc6ce7458b37",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0309-019",
+      "trace_id": "9f03fd4d612b2d8c8e47ea0b22801c80",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    },
+    {
+      "request_id": "RQ-0309-020",
+      "trace_id": "6d6370d3185b32bca2c651c64d239b59",
+      "missing": [
+        "output.model",
+        "output.tokens",
+        "output.latency_ms",
+        "output.model_rationale",
+        "output.model_call_status"
+      ]
+    }
+  ],
+  "traces_missing_required_field_count": 20,
+  "incomplete_model_traces": [],
+  "model_call_trace_count": 0,
+  "skipped_no_eligible_candidates": [],
+  "null_error_is_valid": true,
+  "audit_source_commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+  "audited_export": "evidence/stage3-hosted/traces.json",
+  "comparison_stage": "before-real-model-field-fix"
+}

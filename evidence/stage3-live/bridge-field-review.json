@@ -1,0 +1,36 @@
+{
+  "_evidence": {
+    "stage": "stage-3-tracing",
+    "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+    "commit_role": "instrumented_source_revision",
+    "destination": "langfuse",
+    "hosted_read_verified": true,
+    "provider_mode": "openrouter",
+    "session_id": "ride-matcher-838f1d2a21f043a5bc9d24241e8e0723",
+    "dataset_sha256": {
+      "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+      "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+    },
+    "exported_at_utc": "2026-11-11T13:55:18.549996+00:00",
+    "format": "langfuse-observations-v2-grouped-by-trace"
+  },
+  "before_source_commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+  "before_trace_id": "2079c2fdd069cafe983dac043f7d902b",
+  "after_trace_id": "8e32bc881a4d499fff1aaac44c7b117f",
+  "bridge_specific_field_added": null,
+  "canonical_explanation_unchanged": true,
+  "existing_explanation_fields": [
+    "output.evaluated_candidates[*].reason",
+    "output.decision_rationale"
+  ],
+  "reason": "No bridge-specific addition was needed: the existing audit already contained the 16-minute exclusion, Burnside Bridge detour note and 4-minute minimum-ETA winner.",
+  "new_general_live_fields": [
+    "generation_id",
+    "latency_ms",
+    "model",
+    "model_call_status",
+    "model_latency_ms",
+    "model_rationale",
+    "tokens"
+  ]
+}

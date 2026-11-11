@@ -1,7 +1,7 @@
 {
   "_evidence": {
     "stage": "evidence-provenance-index",
-    "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+    "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
     "commit_role": "latest_instrumented_source_catalogued",
     "provenance_basis": "Artifact revisions derived from Git history; see per-file execution limitations."
   },
@@ -323,6 +323,78 @@
       "sha256": "ecbb0aca20e08642a67df022502c6a0d240f266a9cfd8e13a57432f9c1a99e5d",
       "evidence_mode": "hosted-langfuse-dashboard-capture",
       "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-live/README.md",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "stage and source commit in document header",
+      "sha256": "b74499c4641fb0810033f49298993a11bfd8e34fbe40a489a55b7950dd2b3c7e",
+      "evidence_mode": "documentation-or-offline-pytest"
+    },
+    {
+      "artifact": "evidence/stage3-live/before-field-audit.json",
+      "stage": "stage-3-live-review",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-live/before-field-audit.json#_evidence",
+      "sha256": "c6b40c38e0f4706b757f1a11ecb5af1dfbc127c8b8f8d7fc3f2483351b11cacf",
+      "evidence_mode": "historical-field-comparison"
+    },
+    {
+      "artifact": "evidence/stage3-live/bridge-field-review.json",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/bridge-field-review.json#_evidence",
+      "sha256": "5332a25fe9fb9a96b467c1cd39ce1c8aa8b4dd9fec4fd4733a133eb2a6cb0ed8",
+      "evidence_mode": "live-openrouter-hosted-langfuse"
+    },
+    {
+      "artifact": "evidence/stage3-live/bridge-trace.json",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/bridge-trace.json#_evidence",
+      "sha256": "b374cda57cac4c99ea3bbcb43192e7b63702a1634dd20cf1e3234a62da95fbf0",
+      "evidence_mode": "live-openrouter-hosted-langfuse"
+    },
+    {
+      "artifact": "evidence/stage3-live/field-audit.json",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/field-audit.json#_evidence",
+      "sha256": "d9555597ec4c4726e3d6d24b29d4624fbbfff2e8e4e56cc7068fc45aa3595f46",
+      "evidence_mode": "live-openrouter-hosted-langfuse"
+    },
+    {
+      "artifact": "evidence/stage3-live/pytest.txt",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/pytest.txt.metadata.json",
+      "sha256": "fdeb42450f33d48095d929a899814c3a18749da8843382065d2c2d4ea3f6a59d",
+      "evidence_mode": "documentation-or-offline-pytest"
+    },
+    {
+      "artifact": "evidence/stage3-live/summary.json",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/summary.json#_evidence",
+      "sha256": "07469d641bde3f3ef782052952c8588897c8255f9849a2258af2a8b38c6fd191",
+      "evidence_mode": "live-openrouter-hosted-langfuse"
+    },
+    {
+      "artifact": "evidence/stage3-live/traces.json",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/traces.json#_evidence",
+      "sha256": "0dd3558dc11e0f441b624d8f6ac08b82b6d4f21a24c031971c113708d07e35d9",
+      "evidence_mode": "live-openrouter-hosted-langfuse"
+    },
+    {
+      "artifact": "evidence/stage3-live/verification.json",
+      "stage": "stage-3-live-review",
+      "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+      "metadata": "evidence/stage3-live/verification.json#_evidence",
+      "sha256": "52a5d8ad7c1d0a4be3b8f3b21780040fae548b5c67bf9e1b19c78a3203727c14",
+      "evidence_mode": "live-openrouter-hosted-langfuse"
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "_evidence": {
+    "stage": "stage-3-tracing",
+    "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+    "commit_role": "instrumented_source_revision",
+    "destination": "langfuse",
+    "hosted_read_verified": true,
+    "provider_mode": "openrouter",
+    "session_id": "ride-matcher-838f1d2a21f043a5bc9d24241e8e0723",
+    "dataset_sha256": {
+      "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+      "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+    },
+    "exported_at_utc": "2026-11-11T13:55:18.549996+00:00",
+    "format": "langfuse-observations-v2-grouped-by-trace"
+  },
+  "trace_count": 20,
+  "bridge_check": "passed",
+  "missing_required_fields": [],
+  "incomplete_model_traces": [],
+  "model_call_trace_count": 19,
+  "matched": 19,
+  "no_match_requests": [
+    "RQ-0308-018"
+  ]
+}

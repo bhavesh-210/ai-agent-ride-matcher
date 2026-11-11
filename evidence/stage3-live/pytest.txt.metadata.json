@@ -1,0 +1,8 @@
+{
+  "stage": "stage-3-live-review",
+  "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+  "commit_role": "tested_instrumented_source",
+  "artifact": "evidence/stage3-live/pytest.txt",
+  "test_count": 67,
+  "sha256": "fdeb42450f33d48095d929a899814c3a18749da8843382065d2c2d4ea3f6a59d"
+}
