@@ -251,6 +251,51 @@
       "metadata": "evidence/stage3-local/traces.json#_evidence",
       "sha256": "91963503be33c94873baeb8c04dc0728e29a921395a1afd868bcf0fd5d1eec72",
       "evidence_mode": "local-langfuse-sdk-no-hosted-upload"
+    },
+    {
+      "artifact": "evidence/stage3-hosted/README.md",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "stage and source commit in document header",
+      "sha256": "43a8eef7eabd1422e61bf0fd493b54d2b9ca159544f7cde66a13a99ed38296d7",
+      "evidence_mode": "hosted-langfuse-offline-provider",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/bridge-trace.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/bridge-trace.json#_evidence",
+      "sha256": "cd3c6edc0922ff98ca10decba90e5e742a32d8fcefcea24e8148b5afea7d7897",
+      "evidence_mode": "hosted-langfuse-offline-provider",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/summary.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/summary.json#_evidence",
+      "sha256": "4bcc6025718ef6289748cde68312c7aa3297a98a27691335a8fcd70f1617d4b8",
+      "evidence_mode": "hosted-langfuse-offline-provider",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/traces.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/traces.json#_evidence",
+      "sha256": "6a8d974388c6682d0f633a3a671a59c356832ae76b9a584b895ad9b727c34e0a",
+      "evidence_mode": "hosted-langfuse-offline-provider",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/verification.json",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/verification.json#_evidence",
+      "sha256": "1b4f5a87af8d0db8f9bf0d02bc6e2b00ef8bc83deb9ee2467008551ac1014570",
+      "evidence_mode": "hosted-langfuse-offline-provider",
+      "hosted_read_verified": true
     }
   ]
 }

@@ -12,7 +12,7 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
 - Successful live OpenRouter run and matching Activity/Logs screenshots are committed. The actual post-build Claude Code Plan Mode review is now documented below; the repository-copy launch-command screenshot and reviewer acceptance remain pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
-- Stage 3 Langfuse instrumentation and export are implemented. Hosted ingestion/read-back still requires private Langfuse credentials; local SDK exports must not be mistaken for hosted traces.
+- Stage 3 complete: 20 hosted Langfuse traces were read back and exported (288 observations), with the bridge explanation verified. Provider mode was offline; no new OpenRouter calls are claimed. [Hosted evidence](evidence/stage3-hosted/README.md).
 
 ## Evidence stages and source versions
 
@@ -210,7 +210,7 @@ python -m pytest -q
 python -m ride_matcher.validate_submission
 ```
 
-The second command regenerates the offline request audits and captured mocked prompt. Langfuse tracing is still deferred to the next stage; no new live API run is claimed.
+The second command regenerates the Stage 2 offline audits and mocked prompt. At that archived stage, Langfuse was deferred. The Stage 3 section below records the subsequent hosted tracing run; no new OpenRouter API run is claimed.
 
 ## Stage 3: Langfuse tracing and export — source `d218193`
 
@@ -218,9 +218,13 @@ The matching decision is unchanged. [Trace conventions](docs/langfuse-convention
 
 [Instrumented source commit](https://github.com/bhavesh-210/ai-agent-ride-matcher/commit/d218193fa5bcbe199ff47c4cf19926d02d70dc96). [Local SDK export status and artifacts](evidence/stage3-local/README.md): **20 distinct traces, 288 observations, bridge check passed, 62 tests passed**. [Test output](evidence/stage3-local/pytest.txt) and [summary](evidence/stage3-local/summary.json) carry that source revision. These results are local, not hosted.
 
-**Hosted status: pending credentials and verified read-back.** No Langfuse project keys are available in this workspace yet. Local SDK exports, if present under `evidence/stage3-local`, are explicitly local OpenTelemetry captures and do not establish hosted Langfuse ingestion. There has been no new live OpenRouter call for this stage.
+**Hosted status: verified and exported.** [Hosted evidence and reproduction notes](evidence/stage3-hosted/README.md), [all 20 traces](evidence/stage3-hosted/traces.json), [bridge trace](evidence/stage3-hosted/bridge-trace.json), and [independent read-back checks](evidence/stage3-hosted/verification.json) reference the executed source commit `d218193`. The SDK/API confirmed 20 distinct roots and 288 ended observations; the Langfuse dashboard showed the same 20 roots. Every source request has a trace, including the unmatched request.
 
-Keep project credentials in private, gitignored `.env`: `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and `LANGFUSE_BASE_URL` for the correct region. Do not put them in the repository or screenshots. The batch command defaults to the hosted destination and fails if credentials/authentication are missing. It checks all 20 server traces after flushing and exports only after complete observation read-back.
+The batch ran in **offline provider mode**, with real hosted Langfuse ingestion and API export but no new OpenRouter calls. Local exports under `stage3-local` remain separate and explicitly unverified as hosted; they were not reused as hosted evidence.
+
+The hosted dashboard was inspected and screenshots were captured locally. Screenshot publication is pending explicit approval because the images include private-project metadata; the server-exported JSON below is the published proof.
+
+Keep project credentials in private, gitignored `.env`: `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and `LANGFUSE_BASE_URL` for the correct region. Do not put them in the repository or screenshots. The batch command defaults to the hosted destination and fails if credentials/authentication are missing. The recorded run used `LANGFUSE_TIMEOUT=30` after the default authentication timeout expired. It checks all 20 server traces after flushing and exports only after complete observation read-back.
 
 ```bash
 python -m ride_matcher.trace_batch --destination langfuse --provider-mode offline --source-commit "$(git rev-parse HEAD)" --output-dir evidence/stage3-hosted
