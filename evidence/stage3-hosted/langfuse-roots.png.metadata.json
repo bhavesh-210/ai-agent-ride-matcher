@@ -1,0 +1,18 @@
+{
+  "stage": "stage-3-tracing",
+  "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+  "commit_role": "instrumented_source_revision",
+  "destination": "langfuse",
+  "hosted_read_verified": true,
+  "provider_mode": "offline",
+  "session_id": "ride-matcher-861a725a2f4142f88399c5e937c96891",
+  "dataset_sha256": {
+    "requests": "0eb793202458c114a6e2796dfac243f6f607cc92e6a85eb7684d843d936a0843",
+    "drivers": "c1584eec8a5fb48a6d6d474c30a805253954db52537322f77a882bc7195c1f02"
+  },
+  "exported_at_utc": "2026-11-11T13:28:01.036341+00:00",
+  "format": "langfuse-observations-v2-grouped-by-trace",
+  "artifact": "evidence/stage3-hosted/langfuse-roots.png",
+  "capture": "Actual Langfuse UI screenshot, unedited",
+  "sha256": "ecbb0aca20e08642a67df022502c6a0d240f266a9cfd8e13a57432f9c1a99e5d"
+}

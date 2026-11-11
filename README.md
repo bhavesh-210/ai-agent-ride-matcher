@@ -222,7 +222,13 @@ The matching decision is unchanged. [Trace conventions](docs/langfuse-convention
 
 The batch ran in **offline provider mode**, with real hosted Langfuse ingestion and API export but no new OpenRouter calls. Local exports under `stage3-local` remain separate and explicitly unverified as hosted; they were not reused as hosted evidence.
 
-The hosted dashboard was inspected and screenshots were captured locally. Screenshot publication is pending explicit approval because the images include private-project metadata; the server-exported JSON below is the published proof.
+The hosted dashboard screenshots are published with explicit user authorization, alongside the server-exported JSON. Their metadata sidecars identify the stage, executed source commit and image hashes.
+
+![Twenty hosted ride roots](evidence/stage3-hosted/langfuse-roots.png)
+
+![Hosted bridge winner and rationale](evidence/stage3-hosted/langfuse-bridge.png)
+
+![Hosted slower-driver exclusion reason](evidence/stage3-hosted/langfuse-bridge-reason.png)
 
 Keep project credentials in private, gitignored `.env`: `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, and `LANGFUSE_BASE_URL` for the correct region. Do not put them in the repository or screenshots. The batch command defaults to the hosted destination and fails if credentials/authentication are missing. The recorded run used `LANGFUSE_TIMEOUT=30` after the default authentication timeout expired. It checks all 20 server traces after flushing and exports only after complete observation read-back.
 

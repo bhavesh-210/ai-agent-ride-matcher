@@ -257,7 +257,7 @@
       "stage": "stage-3-tracing",
       "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
       "metadata": "stage and source commit in document header",
-      "sha256": "43a8eef7eabd1422e61bf0fd493b54d2b9ca159544f7cde66a13a99ed38296d7",
+      "sha256": "92a3ee9aa509eb9bef46327862a875eb4dfa317c630a113dea5619bd4322d2b7",
       "evidence_mode": "hosted-langfuse-offline-provider",
       "hosted_read_verified": true
     },
@@ -295,6 +295,33 @@
       "metadata": "evidence/stage3-hosted/verification.json#_evidence",
       "sha256": "1b4f5a87af8d0db8f9bf0d02bc6e2b00ef8bc83deb9ee2467008551ac1014570",
       "evidence_mode": "hosted-langfuse-offline-provider",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/langfuse-bridge-reason.png",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/langfuse-bridge-reason.png.metadata.json",
+      "sha256": "bcd300e6b348d0c9b31debe87d156a03a2679c7533c1d324c7ae41de850731a8",
+      "evidence_mode": "hosted-langfuse-dashboard-capture",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/langfuse-bridge.png",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/langfuse-bridge.png.metadata.json",
+      "sha256": "ff5ebd2f20d1aefd8449bc78d74b715dab906e11c356b4134ea76a4cfbbe7e27",
+      "evidence_mode": "hosted-langfuse-dashboard-capture",
+      "hosted_read_verified": true
+    },
+    {
+      "artifact": "evidence/stage3-hosted/langfuse-roots.png",
+      "stage": "stage-3-tracing",
+      "commit": "d218193fa5bcbe199ff47c4cf19926d02d70dc96",
+      "metadata": "evidence/stage3-hosted/langfuse-roots.png.metadata.json",
+      "sha256": "ecbb0aca20e08642a67df022502c6a0d240f266a9cfd8e13a57432f9c1a99e5d",
+      "evidence_mode": "hosted-langfuse-dashboard-capture",
       "hosted_read_verified": true
     }
   ]

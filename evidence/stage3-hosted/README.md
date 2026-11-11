@@ -13,7 +13,13 @@ Provider mode: **offline**. These are real hosted Langfuse traces of determinist
 - [summary.json](summary.json): trace count, bridge check, 19 matches and unmatched request ID.
 - [verification.json](verification.json): independent checks against the source snapshots; observation counts and runtime timeout setting.
 
-Hosted dashboard screenshots were captured and inspected locally but are not published: automatic approval review requires explicit permission for images containing private-project metadata. The JSON exports are the published proof. Project keys remain private in the ignored `.env` and are absent from these exports.
+Dashboard screenshots are published with explicit user authorization:
+
+- [Twenty ride roots](langfuse-roots.png)
+- [Bridge winner and rationale](langfuse-bridge.png)
+- [Slower driver's exclusion and detour reason](langfuse-bridge-reason.png)
+
+Each unedited screenshot has a metadata sidecar identifying the stage, executed source commit and content hash. The screenshots show organization/project context; API credentials are absent. Project keys remain private in the ignored `.env`.
 
 ## Bridge explanation checked
 
