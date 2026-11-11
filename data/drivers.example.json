@@ -1,0 +1,6 @@
+[
+  {"request_id":"bridge-001","driver_id":"near-across-river","status":"available","coordinates":{"lat":12.971,"lon":77.591},"straight_line_distance_km":0.4,"actual_pickup_time_minutes":18,"route_note":"SYNTHETIC: distant one-way bridge detour."},
+  {"request_id":"bridge-001","driver_id":"farther-same-bank","status":"available","coordinates":{"lat":12.98,"lon":77.6},"straight_line_distance_km":2.1,"actual_pickup_time_minutes":5},
+  {"request_id":"bridge-001","driver_id":"busy-nearby","status":"on_trip","coordinates":{"lat":12.9701,"lon":77.5901},"straight_line_distance_km":0.1,"actual_pickup_time_minutes":1},
+  {"request_id":"bridge-001","driver_id":"offline-nearby","status":"offline","coordinates":{"lat":12.9702,"lon":77.5902},"straight_line_distance_km":0.2,"actual_pickup_time_minutes":2}
+]
