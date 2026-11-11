@@ -3,7 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 from dotenv import load_dotenv
-from .models import AgentState, RideRequest, Driver
+from .models import AgentState
+from .datasets import load_requests, load_drivers, dataset_warnings
 from .graph import run_match
 from .provider import OpenRouterMatcher, list_free_models
 
@@ -23,16 +24,16 @@ def main():
         return
     requests_bytes = Path(args.requests).read_bytes()
     drivers_bytes = Path(args.drivers).read_bytes()
-    requests = [RideRequest.model_validate(r) for r in json.loads(requests_bytes)]
+    requests = load_requests(args.requests)
     if len({r.request_id for r in requests}) != len(requests):
         raise ValueError("Duplicate request IDs")
     request = next((r for r in requests if r.request_id == args.request_id), None)
     if request is None:
         raise ValueError("Request ID not found")
-    drivers = [Driver.model_validate(d) for d in json.loads(drivers_bytes)]
+    drivers = load_drivers(args.drivers)
     state = AgentState(request=request, all_candidates=tuple(d for d in drivers if d.request_id == request.request_id))
     result = run_match(state, None if args.offline else OpenRouterMatcher())
-    evidence = {"mode": "offline_demo" if args.offline else "live_openrouter",
+    evidence = {"dataset_warnings": dataset_warnings(requests, drivers), "mode": "offline_demo" if args.offline else "live_openrouter",
         "input_sha256": {"requests": hashlib.sha256(requests_bytes).hexdigest(),
                          "drivers": hashlib.sha256(drivers_bytes).hexdigest()},
         "result": result.model_dump(mode="json")}
