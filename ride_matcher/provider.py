@@ -36,7 +36,7 @@ class OpenRouterMatcher:
             "Break equal ETA ties by lexicographically smallest driver_id. "
             "Use only supplied routing metrics; do not invent traffic, bridges or times. "
             "Return ONLY a JSON object with selected_driver_id, estimated_pickup_time_minutes, "
-            "decision_rationale. Copy the chosen ETA exactly and explain the comparison."
+            "decision_rationale. Copy the chosen ETA exactly and explain the comparison in one short line."
         )
         started = datetime.now(timezone.utc).isoformat()
         tick = time.perf_counter()

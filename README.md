@@ -8,7 +8,7 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 
 - Implemented: LangGraph, Pydantic v2 validation, immutable state updates, OpenRouter integration, ETA guard, per-candidate audit, CLI, and optional FastAPI.
 - Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
-- **33 tests pass**, including pre-model pickup policy enforcement, the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
+- **54 tests pass**, including pre-model pickup policy enforcement, the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
 - Successful live OpenRouter run and matching Activity/Logs screenshots are committed. The actual post-build Claude Code Plan Mode review is now documented below; the repository-copy launch-command screenshot and reviewer acceptance remain pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
@@ -129,7 +129,7 @@ Node 1 checks the request-specific snapshot rows, keeps only available drivers w
 
 ### One pickup policy setting
 
-Set `ACCEPTED_EXTRA_PICKUP_MINUTES=0` in the gitignored `.env` (the default is zero). The same validated `MatchingConfig` is used by the graph, CLI and API. Negative, nonfinite and malformed config values fail validation.
+The single project policy value is `accepted_extra_pickup_minutes` in [`config/matching.json`](config/matching.json), currently **0**. The graph, CLI, API and all-request contract tests read it through `MatchingConfig.from_env()`. An optional `ACCEPTED_EXTRA_PICKUP_MINUTES` environment override uses the same loader; `.env.example` leaves this override commented out. Negative, nonfinite and malformed config values fail validation.
 
 The allowance is **extra minutes relative to the fastest available routable driver's supplied road ETA**, not an absolute pickup-time limit. Before the model call, a candidate must satisfy `candidate_ETA - fastest_ETA <= accepted_extra_pickup_minutes`. The boundary is inclusive; missing routes are excluded and zero ETA is valid. Every excluded original candidate retains an audit reason, and the result records the effective config value.
 
@@ -137,11 +137,66 @@ With the default zero allowance, only the fastest candidates reach the model. A 
 
 For the actual bridge request `RQ-0303-002`, the snapshot marks `DRV-16643` available with a 4-minute ETA. `DRV-52907` is geographically closer but takes 16 minutes. The zero-minute allowance removes the 16-minute driver before OpenRouter, and an adversarial test proves that even a model proposal naming that removed driver is overridden.
 
-Run `python -m pytest -q` to reproduce **33 passing tests**. `tests/test_pickup_policy.py` covers the config boundary, invalid config, environment loading, unavailable and invented picks, slower picks inside a wider shortlist, zero-ETA ties, and the actual 16-versus-4-minute snapshot case. These tests use deterministic provider doubles and do not make API calls. The prior live OpenRouter evidence predates this policy change; no new live run or Langfuse trace is claimed.
+Run `python -m pytest -q` to reproduce **54 passing tests**. `tests/test_pickup_policy.py` covers the config boundary, invalid config, environment loading, unavailable and invented picks, slower picks inside a wider shortlist, zero-ETA ties, and the actual 16-versus-4-minute snapshot case. These tests use deterministic provider doubles and do not make API calls. The prior live OpenRouter evidence predates this policy change; no new live run or Langfuse trace is claimed.
 
 Pydantic models are frozen, candidate collections are tuples, and state updates and final graph output are explicitly validated. Duplicate driver IDs within a request, cross-request candidates, invalid statuses, negative ETAs and nonfinite numbers are rejected.
 
 Unavailable profiles and rider identity are not sent to the model. Incorrect model proposals are retained but visibly overridden. Model rationale is an untrusted proposal; the canonical audit is produced from validated metrics. Provider failure logs do not contain response bodies, credentials or request headers.
+
+## Stage 2 pre-model tools and verification
+
+Exactly two graph nodes remain. Node 1 calls three deterministic Python tools in [`ride_matcher/tools.py`](ride_matcher/tools.py):
+
+1. `check_availability`: reads the snapshot status; only `available` passes.
+2. `estimate_pickup_time`: reads validated `road_pickup_minutes` via the explicit CSV mapping; returns no route for missing values. It does not estimate time from distance or invent traffic.
+3. `check_eligibility`: applies availability, route presence and the inclusive shared extra-minute allowance relative to the fastest available route.
+
+All three execute before Node 2 calls OpenRouter. These are graph-invoked Python tools, not optional LLM-requested checks. The mocked HTTP contract test records every tool call and inspects the actual provider messages, proving that the outgoing candidate IDs exactly equal the checked set. [Captured provider prompt](evidence/stage2-prompt-preview.json) is explicitly **mock transport evidence, not a new live call**.
+
+The key prompt requires a fixed JSON response with `selected_driver_id`, `estimated_pickup_time_minutes`, and `decision_rationale`, copied road ETA, and driver-ID tie-breaking. Code rejects IDs outside the checked list, incorrect ETAs and nonminimum picks. It retains the proposal, uses the deterministic road-ETA winner and records the override. Straight-line distance does not rank or break ties.
+
+### Shared threshold and reason
+
+The project setting is **0 extra minutes**: with no supplied rider preference justifying extra delay, the fastest available road ETA is required. Tests for all requests load the same project setting; they do not duplicate a threshold constant. Separate boundary tests deliberately supply alternative configs to test inclusive boundaries and prove that widening the shortlist cannot weaken the final fastest-driver guard.
+
+### Actual test/fix log
+
+This is the actual sequence for this stage, not a reconstructed claim of earlier failures:
+
+| Run / finding | Cause | Fix made or rejected, and why |
+|---|---|---|
+| Previous stage: 33 tests passed | Existing inline checks lacked the newly required named tools | Added a new contract suite before refactoring; prior passing tests alone did not prove this requirement. |
+| First new-suite run: collection error, `cannot import name tools` | The three checks still lived inline and `ride_matcher/tools.py` did not exist | Added the three tool functions and wired all three into Node 1 before OpenRouter. [Original output](evidence/stage2-first-pytest.txt). |
+| Second run: collection error, `request is a reserved name` | New parameterized test used pytest's reserved fixture name | Renamed the test parameter to `ride_request`. [Original output](evidence/stage2-second-pytest.txt). |
+| Source join finding: `RQ-0308-018` has no candidates; four rows reference `RQ-0309-018` | Request IDs differ between supplied files | Rejected silently relabeling source rows: there is no authoritative correction. Preserve IDs, report the anomaly and return an explicit no-match. |
+| Final run: **54 passed, 1 warning** | All implemented matching contracts pass | [Full output](evidence/stage2-final-pytest.txt). The remaining warning comes from the installed anyio pytest plugin's deprecated pytest alias, not a matcher failure. |
+
+No assignment mismatch failure is claimed for the collection-error runs: collection stopped before assignments could execute. No failures or timestamps have been invented. The prior planning review and this work occurred after the original build.
+
+### Three assignments checked against the snapshot
+
+| Request | Selected driver | Snapshot status | Selected road ETA | Nearest available road ETA | Decision |
+|---|---|---|---:|---:|---|
+| `RQ-0303-001` | `DRV-20417` | available | 3 min | 3 min | Retain: already the minimum road ETA. |
+| `RQ-0303-002` | `DRV-16643` | available | 4 min | 16 min (`DRV-52907`) | Retain 4-minute winner; reject closest-looking bridge driver and extra bridge penalties because detour is already in supplied ETA. |
+| `RQ-0304-005` | `DRV-47038` | available | 4 min | 8 min (`DRV-26148`) | Retain faster road-ETA assignment; reject distance-based ranking. |
+
+These comparisons were reproduced from the source rows and current offline outputs; no source data was changed. [All-request report and per-candidate audit](evidence/stage2-request-validation.json).
+
+### All 20 requests and the explicit data exception
+
+The parameterized contract suite exercises all **20** request IDs. For every request with available routable source rows it asserts exactly one selected available driver, an ETA within the shared allowance and equality to the minimum road ETA. It also verifies the checked provider inputs and a single-call deterministic fallback. The bridge trap has a separate actual-data adversarial model test.
+
+**19 requests produce one valid match. `RQ-0308-018` produces an explicit no-match because of the source-ID mismatch above.** It would be dishonest to claim 20 successful assignments from these files. The remaining one-per-request requirement depends on an authoritative dataset correction; it is not hidden, skipped or fixed by guessing.
+
+Reproduce from the repository root (no API key or network needed):
+
+```bash
+python -m pytest -q
+python -m ride_matcher.validate_submission
+```
+
+The second command regenerates the offline request audits and captured mocked prompt. Langfuse tracing is still deferred to the next stage; no new live API run is claimed.
 
 ## Planning evidence
 
@@ -200,4 +255,4 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 
 Before any local commit, `git check-ignore .env` should print `.env`, and `git ls-files .env` should print nothing. Never commit an API key. The included `.env.example` contains no credentials.
 
-Validation: 33 tests pass locally on Python 3.12 with the committed assignment CSVs. Tests include synthetic and actual bridge cases, pre-model pickup allowance, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.
+Validation: 54 tests pass locally on Python 3.12 with the committed assignment CSVs. Tests include synthetic and actual bridge cases, pre-model pickup allowance, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.

@@ -1,16 +1,19 @@
 from langgraph.graph import StateGraph, START, END
 from .models import AgentState, CandidateAudit, MatchResult
 from .config import MatchingConfig
+from . import tools as candidate_tools
 
 
 def filter_available_drivers(state: AgentState, config: MatchingConfig | None = None):
     """New validated state updates; never mutate incoming state."""
     config = config if config is not None else MatchingConfig.from_env()
-    routable = tuple(d for d in state.all_candidates if d.status == "available"
-                     and d.actual_pickup_time_minutes is not None)
-    fastest = min((d.actual_pickup_time_minutes for d in routable), default=None)
-    eligible = tuple(d for d in routable
-                     if d.actual_pickup_time_minutes - fastest <= config.accepted_extra_pickup_minutes)
+    # Run both snapshot tools for every row before computing the shared baseline.
+    checks = tuple((d, candidate_tools.check_availability(d),
+                    candidate_tools.estimate_pickup_time(d)) for d in state.all_candidates)
+    fastest = min((eta for _, available, eta in checks if available and eta is not None), default=None)
+    eligible = tuple(d for d, available, eta in checks
+                     if candidate_tools.check_eligibility(available=available, pickup_minutes=eta,
+                                                         fastest_minutes=fastest, config=config))
     updated = AgentState.model_validate({**state.model_dump(), "eligible_candidates": eligible})
     return {"eligible_candidates": updated.eligible_candidates}
 
