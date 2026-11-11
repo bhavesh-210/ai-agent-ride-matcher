@@ -10,7 +10,7 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 - Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
 - **20 tests pass**, including the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
-- Successful live OpenRouter run and matching Activity/Logs screenshots are committed. Only the genuine Claude Code Plan Mode excerpt remains pending.
+- Successful live OpenRouter run and matching Activity/Logs screenshots are committed. The actual post-build Claude Code Plan Mode review is now documented below; the repository-copy launch-command screenshot and reviewer acceptance remain pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
 - Langfuse is deferred; no Langfuse tracing is claimed.
 
@@ -133,17 +133,35 @@ Unavailable profiles and rider identity are not sent to the model. Incorrect mod
 
 ## Planning evidence
 
-Implementation plan authored during development (NOT a Claude Code transcript):
+This review ran **after the original implementation already existed**, on a separate repository copy, using **Claude Code CLI in Plan Mode with local Ollama `qwen3:8b`**. It was not an Anthropic-hosted Claude model and was not planning before the original build.
 
-1. Validate source columns and exact request-ID joins; report source anomalies.
-2. Filter unavailable drivers before the model.
-3. Request structured selection using supplied road minutes.
-4. Independently verify the driver ID and ETA.
-5. Produce complete candidate audit and save provider metadata.
+The original-plan screenshot shows **done 5:29 PM**; the revised-plan screenshot shows **done 5:34 PM**. No calendar date or timezone is inferred from filenames or system settings.
 
-### Genuine Claude Code Plan Mode excerpt
+[Read the actual planning evidence, excerpts and limitations](evidence/planning-review.md).
 
-PENDING. Open this repository in your Claude Code, use `CLAUDE_CODE_PROMPT.md` in Plan Mode, review its actual proposal, then paste a short real excerpt here. Do not relabel the implementation plan above as a Claude session.
+### Original proposal and actual pushback
+
+The original plan proposed “bridge detour weight,” “Lowest bridge detour weight,” and “Most recent activity,” together with an extra risk calculation. These were invented inputs beyond the supplied road pickup minutes.
+
+**The gap I objected to:** the model's selected driver must be independently checked against the eligible routable candidate set and the deterministic minimum supplied ETA. In the bridge case, an unchecked proposal could choose the closer **16-minute** driver over the **4-minute** driver. Supplied road times already account for bridge detours.
+
+The screenshot of the actual pushback requests removal of invented ranking inputs and validation of eligible membership, copied ETA and deterministic minimum, with an audited fallback for invalid proposals. The revised plan states:
+
+> Ensures selected driver exists in filtered list
+
+> Confirms ETA matches driver's road_pickup_minutes
+
+> Verifies ETA is deterministic minimum
+
+![Original plan before pushback — terminal shows done 5:29 PM](evidence/plan-original.webp)
+
+![Actual pushback and revised plan — terminal shows done 5:34 PM](evidence/plan-revised.webp)
+
+### Terminal proof and remaining limitation
+
+[Repository-copy terminal screenshot](evidence/plan-terminal.webp) shows `~/ai-agent-ride-matcher-plan-review`, `qwen3:8b` and `plan mode on`.
+
+[Earlier launch-command screenshot](evidence/plan-launch-command.webp) shows `ollama launch claude --model qwen3:8b -- --permission-mode plan` and Plan Mode, but in the home folder. It is an earlier session, not evidence of the later repository-copy launch command. A screenshot of that later session's own launch command remains pending. Reviewer acceptance is not claimed.
 
 ## Optional local API
 
@@ -164,7 +182,9 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 - [x] Temporary key configured privately; `liquid/lfm-2.5-2.6b:free` selected
 - [x] Successful live API run with `model_verified`
 - [x] Matching genuine OpenRouter Activity and generation screenshots committed
-- [ ] Genuine Claude Code Plan Mode excerpt added
+- [x] Actual post-build Claude Code Plan Mode screenshots and excerpts added, with Ollama model and visible times disclosed
+- [ ] Repository-copy session's own launch-command screenshot
+- [ ] Reviewer acceptance of planning evidence
 
 Before any local commit, `git check-ignore .env` should print `.env`, and `git ls-files .env` should print nothing. Never commit an API key. The included `.env.example` contains no credentials.
 
