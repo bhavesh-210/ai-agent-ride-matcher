@@ -46,6 +46,7 @@ class ModelCall(StrictModel):
     raw_content: str
 
 class MatchResult(StrictModel):
+    accepted_extra_pickup_minutes: float = Field(default=0, ge=0)
     selected_driver_id: str | None = None
     estimated_pickup_time_minutes: float | None = None
     decision_rationale: str

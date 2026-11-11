@@ -21,7 +21,7 @@ def fake_call():
 def test_bridge_and_filter_and_immutability(state):
     before = state.model_dump_json()
     def provider(request, candidates):
-        assert {d.driver_id for d in candidates} == {"near-across-river", "farther-same-bank"}
+        assert {d.driver_id for d in candidates} == {"farther-same-bank"}
         assert all(d.status == "available" for d in candidates)
         return ModelDecision(selected_driver_id="farther-same-bank", estimated_pickup_time_minutes=5,
                              decision_rationale="5 minutes beats 18 minutes"), fake_call()

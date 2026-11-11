@@ -1,15 +1,22 @@
 from langgraph.graph import StateGraph, START, END
 from .models import AgentState, CandidateAudit, MatchResult
+from .config import MatchingConfig
 
 
-def filter_available_drivers(state: AgentState):
+def filter_available_drivers(state: AgentState, config: MatchingConfig | None = None):
     """New validated state updates; never mutate incoming state."""
-    eligible = tuple(d for d in state.all_candidates if d.status == "available")
+    config = config if config is not None else MatchingConfig.from_env()
+    routable = tuple(d for d in state.all_candidates if d.status == "available"
+                     and d.actual_pickup_time_minutes is not None)
+    fastest = min((d.actual_pickup_time_minutes for d in routable), default=None)
+    eligible = tuple(d for d in routable
+                     if d.actual_pickup_time_minutes - fastest <= config.accepted_extra_pickup_minutes)
     updated = AgentState.model_validate({**state.model_dump(), "eligible_candidates": eligible})
     return {"eligible_candidates": updated.eligible_candidates}
 
 
-def build_graph(provider=None):
+def build_graph(provider=None, config: MatchingConfig | None = None):
+    config = config if config is not None else MatchingConfig.from_env()
     def match_fastest_driver(state: AgentState):
         routable = tuple(d for d in state.eligible_candidates
                          if d.actual_pickup_time_minutes is not None)
@@ -36,6 +43,10 @@ def build_graph(provider=None):
                 outcome, reason = "excluded", f"Status {d.status}; removed before model call."
             elif d.actual_pickup_time_minutes is None:
                 outcome, reason = "excluded", "Missing road ETA; unavailable route cannot be ranked."
+            elif d not in state.eligible_candidates:
+                outcome, reason = "excluded", (
+                    f"Road ETA exceeds fastest available route by more than the configured "
+                    f"{config.accepted_extra_pickup_minutes:g} extra pickup minutes; removed before model call.")
             elif d == winner:
                 outcome, reason = "selected", "Lowest road ETA; equal ETA ties use driver_id ascending."
             else:
@@ -56,12 +67,13 @@ def build_graph(provider=None):
         result = MatchResult(selected_driver_id=winner.driver_id if winner else None,
             estimated_pickup_time_minutes=winner.actual_pickup_time_minutes if winner else None,
             decision_rationale=rationale, evaluated_candidates=tuple(audits),
-            model_call=call, model_proposal=proposal, verification=verification)
+            model_call=call, model_proposal=proposal, verification=verification,
+            accepted_extra_pickup_minutes=config.accepted_extra_pickup_minutes)
         updated = AgentState.model_validate({**state.model_dump(), "final_match": result, "error": error})
         return {"final_match": updated.final_match, "error": updated.error}
 
     graph = StateGraph(AgentState)
-    graph.add_node("filter_available_drivers", filter_available_drivers)
+    graph.add_node("filter_available_drivers", lambda state: filter_available_drivers(state, config))
     graph.add_node("match_fastest_driver", match_fastest_driver)
     graph.add_edge(START, "filter_available_drivers")
     graph.add_edge("filter_available_drivers", "match_fastest_driver")
@@ -69,6 +81,6 @@ def build_graph(provider=None):
     return graph.compile()
 
 
-def run_match(state: AgentState, provider=None):
+def run_match(state: AgentState, provider=None, config: MatchingConfig | None = None):
     # LangGraph output is a dict; explicitly validate final boundaries too.
-    return AgentState.model_validate(build_graph(provider).invoke(state))
+    return AgentState.model_validate(build_graph(provider, config).invoke(state))

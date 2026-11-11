@@ -8,7 +8,7 @@ Public repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 
 - Implemented: LangGraph, Pydantic v2 validation, immutable state updates, OpenRouter integration, ETA guard, per-candidate audit, CLI, and optional FastAPI.
 - Assignment CSVs loaded, validated and published with explicit authorization: **20 requests and 80 candidate rows**.
-- **20 tests pass**, including the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
+- **33 tests pass**, including pre-model pickup policy enforcement, the actual bridge detour, unavailable drivers, all-request evaluation, and source-ID mismatch.
 - Actual-data offline evaluation: **19 matches, 1 unmatched request, 7 strict ETA improvements over the nearest available driver**.
 - Successful live OpenRouter run and matching Activity/Logs screenshots are committed. The actual post-build Claude Code Plan Mode review is now documented below; the repository-copy launch-command screenshot and reviewer acceptance remain pending.
 - Evidence files containing `offline` or `offline_assignment_evaluation_no_api_call` are explicitly NOT live API evidence.
@@ -125,7 +125,19 @@ flowchart TD
     M --> R["Match and full candidate audit"]
 ```
 
-Node 1 filters by available status. Node 2 removes missing routes, requests a structured OpenRouter proposal, checks the driver ID and copied ETA against a deterministic minimum, and produces the audit. Equal road ETAs use driver_id ascending; distance never determines ranking or ties.
+Node 1 checks the request-specific snapshot rows, keeps only available drivers with usable routes, and enforces the configured extra pickup allowance before OpenRouter receives candidates. Node 2 requests a structured OpenRouter proposal, checks the driver ID and copied ETA against a deterministic minimum, and produces the audit. Equal road ETAs use driver_id ascending; distance never determines ranking or ties.
+
+### One pickup policy setting
+
+Set `ACCEPTED_EXTRA_PICKUP_MINUTES=0` in the gitignored `.env` (the default is zero). The same validated `MatchingConfig` is used by the graph, CLI and API. Negative, nonfinite and malformed config values fail validation.
+
+The allowance is **extra minutes relative to the fastest available routable driver's supplied road ETA**, not an absolute pickup-time limit. Before the model call, a candidate must satisfy `candidate_ETA - fastest_ETA <= accepted_extra_pickup_minutes`. The boundary is inclusive; missing routes are excluded and zero ETA is valid. Every excluded original candidate retains an audit reason, and the result records the effective config value.
+
+With the default zero allowance, only the fastest candidates reach the model. A nonzero allowance widens the shortlist for evaluation, but the final ETA guard still requires the deterministic fastest driver, with driver ID ascending for equal ETAs. No slower model proposal is accepted. Invalid proposals are recorded and overridden without a second model call; no eligible route returns no match and skips the model.
+
+For the actual bridge request `RQ-0303-002`, the snapshot marks `DRV-16643` available with a 4-minute ETA. `DRV-52907` is geographically closer but takes 16 minutes. The zero-minute allowance removes the 16-minute driver before OpenRouter, and an adversarial test proves that even a model proposal naming that removed driver is overridden.
+
+Run `python -m pytest -q` to reproduce **33 passing tests**. `tests/test_pickup_policy.py` covers the config boundary, invalid config, environment loading, unavailable and invented picks, slower picks inside a wider shortlist, zero-ETA ties, and the actual 16-versus-4-minute snapshot case. These tests use deterministic provider doubles and do not make API calls. The prior live OpenRouter evidence predates this policy change; no new live run or Langfuse trace is claimed.
 
 Pydantic models are frozen, candidate collections are tuples, and state updates and final graph output are explicitly validated. Duplicate driver IDs within a request, cross-request candidates, invalid statuses, negative ETAs and nonfinite numbers are rejected.
 
@@ -188,4 +200,4 @@ Use http://127.0.0.1:8000/docs, POST `/match` with `{ "request": <request object
 
 Before any local commit, `git check-ignore .env` should print `.env`, and `git ls-files .env` should print nothing. Never commit an API key. The included `.env.example` contains no credentials.
 
-Validation: 20 tests pass locally on Python 3.12.14 with the supplied assignment CSVs. Without them, the 16 self-contained tests run and four assignment integration cases skip. Tests include synthetic and actual bridge cases, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.
+Validation: 33 tests pass locally on Python 3.12 with the committed assignment CSVs. Tests include synthetic and actual bridge cases, pre-model pickup allowance, ETA/availability invariants across all requests, source-ID mismatch, malformed proposals, provider failure and mocked HTTP integration. Mocked integration is not proof of a live call. `requirements-tested.txt` records directly used versions; `requirements.txt` defines compatible ranges.

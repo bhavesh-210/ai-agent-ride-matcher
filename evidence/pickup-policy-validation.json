@@ -1,0 +1,12 @@
+{
+  "validation": "offline_pytest_and_snapshot_evaluation",
+  "pytest_command": "python -m pytest -q",
+  "passed": 33,
+  "failed": 0,
+  "accepted_extra_pickup_minutes": 0,
+  "request_count": 20,
+  "candidate_row_count": 80,
+  "matched_request_count": 19,
+  "strict_eta_improvement_count": 7,
+  "new_live_api_call": false
+}
