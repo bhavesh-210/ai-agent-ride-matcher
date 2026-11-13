@@ -16,4 +16,4 @@ DOM interaction was checked with jsdom against actual demo API results. A headle
 
 No new real OpenRouter calls or hosted Langfuse uploads were performed for this update. API trace integration was verified with the real SDK and an in-memory exporter. The separately archived live batch remains tied to its original source commit. The GitHub Actions matrix is configured for Python 3.11 and 3.12; its actual run status is shown by the repository badge.
 
-The source commit and fresh verification record are linked after publication. Archived assignment evidence was not regenerated or edited.
+Tested source: [`98f1726`](https://github.com/bhavesh-210/ai-agent-ride-matcher/commit/98f17269db0f8ba040ed1a5561b8c552250f5418). All 28 Python/config/dependency files checked against the published tree matched. [Fresh verification record](../evidence/portfolio/verification.json) · [Raw pytest output](../evidence/portfolio/pytest.txt) · [Log provenance](../evidence/portfolio/pytest.txt.metadata.json). Archived assignment evidence was not regenerated or edited.

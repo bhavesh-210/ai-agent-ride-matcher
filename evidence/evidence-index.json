@@ -1,9 +1,9 @@
 {
   "_evidence": {
-    "stage": "evidence-provenance-index",
-    "commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
-    "commit_role": "latest_instrumented_source_catalogued",
-    "provenance_basis": "Artifact revisions derived from Git history; see per-file execution limitations."
+    "stage": "portfolio-hardening-index",
+    "commit": "98f17269db0f8ba040ed1a5561b8c552250f5418",
+    "commit_role": "tested_source_revision",
+    "previous_index_commit": "855a4ece6769c58b1aac4fee56a31d8e41380181"
   },
   "conventions": {
     "commit": "Existing archive commit containing the artifact version before this labeling update; not the new label commit and not a proven execution checkout.",
@@ -395,6 +395,26 @@
       "metadata": "evidence/stage3-live/verification.json#_evidence",
       "sha256": "52a5d8ad7c1d0a4be3b8f3b21780040fae548b5c67bf9e1b19c78a3203727c14",
       "evidence_mode": "live-openrouter-hosted-langfuse"
+    },
+    {
+      "artifact": "evidence/portfolio/verification.json",
+      "stage": "portfolio-hardening",
+      "commit": "98f17269db0f8ba040ed1a5561b8c552250f5418",
+      "commit_role": "tested_source_revision",
+      "metadata": "evidence/portfolio/verification.json#_evidence",
+      "sha256": "6527b017d93ea9aa293cb7b3dac3c5892ba8d99218c2a7ea4770e425db09a10f",
+      "evidence_mode": "offline-verification",
+      "note": "Generated after committing the source; no new hosted API calls."
+    },
+    {
+      "artifact": "evidence/portfolio/pytest.txt",
+      "stage": "portfolio-hardening",
+      "commit": "98f17269db0f8ba040ed1a5561b8c552250f5418",
+      "commit_role": "tested_source_revision",
+      "metadata": "evidence/portfolio/pytest.txt.metadata.json",
+      "sha256": "8b07bc381570efd01b2e80d732e0dfd9239e231e070e4e77ecfcab3ed2a718cf",
+      "evidence_mode": "offline-verification",
+      "note": "Generated after committing the source; no new hosted API calls."
     }
   ]
 }

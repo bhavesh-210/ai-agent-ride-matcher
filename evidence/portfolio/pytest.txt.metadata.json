@@ -1,0 +1,13 @@
+{
+  "_evidence": {
+    "stage": "portfolio-hardening",
+    "commit": "98f17269db0f8ba040ed1a5561b8c552250f5418",
+    "commit_role": "tested_source_revision",
+    "provider_mode": "offline_verification_only",
+    "verified_at_utc": "2026-11-13T20:00:52.999528+00:00"
+  },
+  "sha256": "8b07bc381570efd01b2e80d732e0dfd9239e231e070e4e77ecfcab3ed2a718cf",
+  "command": "python -m pytest -q",
+  "python": "3.12.14",
+  "exit_code": 0
+}

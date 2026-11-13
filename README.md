@@ -72,6 +72,8 @@ Every original candidate receives an audit entry, including unavailable drivers 
 
 ## Tests and offline replay
 
+Current local verification: **113 passing pytest cases**. The recorded source revision and raw output are linked below.
+
 ```bash
 python -m pytest -q
 python -m ride_matcher.benchmark
