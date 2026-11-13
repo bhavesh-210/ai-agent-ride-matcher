@@ -24,7 +24,11 @@ Built with **Python, LangGraph, Pydantic v2, OpenRouter, FastAPI, pytest and Lan
 
 These are results on a small snapshot, **not measured real-world rider wait-time reductions**. Run `python -m ride_matcher.benchmark` to reproduce the comparison without API keys. The unmatched request stays unmatched; the matcher does not guess a corrected source ID.
 
-## Try it in two minutes
+## Open the demo
+
+**[Launch the public demo →](https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/)** — no installation, sign-in or API keys. Explore recorded Python-agent outputs for all 20 requests, including the bridge case. The hosted page replays snapshot results; it does not execute a live model call. [Demo source](web-demo/README.md).
+
+## Run the Python agent locally
 
 Python 3.11 or 3.12. From a terminal:
 

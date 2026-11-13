@@ -1,5 +1,9 @@
 # Demo walkthrough
 
+**Public resume link:** [https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/](https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/)
+
+The public page replays recorded outputs from the Python graph. It needs no installation, sign-in or API keys. The steps below also work in the local FastAPI demo, which executes the graph on demand.
+
 Start the server using the README, then open http://127.0.0.1:8000.
 
 1. Run the default bridge case, `RQ-0303-002`. Compare the geographically closer 16-minute driver with the selected 4-minute driver.

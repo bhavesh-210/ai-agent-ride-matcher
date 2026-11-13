@@ -9,4 +9,6 @@ Python · LangGraph · Pydantic · OpenRouter · FastAPI · Langfuse · pytest
 
 Repository: https://github.com/bhavesh-210/ai-agent-ride-matcher
 
+Demo: https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/
+
 Use two bullets if space is tight. The percentage describes snapshot routing estimates, not measured live rider wait times. The recorded live evidence is 20 hosted traces and 19 real model calls; the unmatched request correctly has no generation. Do not claim production fleet deployment, live traffic routing, or that the LLM itself computes routes.
