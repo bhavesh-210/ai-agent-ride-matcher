@@ -12,4 +12,4 @@ To serve this exact public demo locally:
 python3 -m http.server 8001 --directory web-demo
 ```
 
-Open http://localhost:8001. The hosted source revision is `81c887488fd068b934b26109adc291f0d5ed10c7` in the Site source repository.
+Open http://localhost:8001. The demo also includes a guided bridge walkthrough, archived trace excerpts and a browser policy simulator. The simulator is tested against the Python graph for 60 scenarios; it is not a live Python or OpenRouter endpoint. The original hosted export source remains `98c5804d18e90484023abf0d79b7f3a16469c40c`.

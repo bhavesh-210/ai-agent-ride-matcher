@@ -26,7 +26,7 @@ These are results on a small snapshot, **not measured real-world rider wait-time
 
 ## Open the demo
 
-**[Launch the public demo →](https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/)** — no installation, sign-in or API keys. Explore recorded Python-agent outputs for all 20 requests, including the bridge case. The hosted page replays snapshot results; it does not execute a live model call. [Demo source](web-demo/README.md).
+**[Launch the public demo →](https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/)** — no installation, sign-in or API keys. Follow the bridge walkthrough, inspect recorded Python-agent outputs and model traces for all 20 requests, or edit driver statuses and ETAs in a browser policy simulator. The hosted page replays snapshot evidence and runs a clearly labelled browser simulator; it does not execute Python or a live model call. [Demo source](web-demo/README.md).
 
 ## Run the Python agent locally
 
@@ -76,7 +76,7 @@ Every original candidate receives an audit entry, including unavailable drivers 
 
 ## Tests and offline replay
 
-Verified locally and in GitHub Actions: **113 passing pytest cases on Python 3.11 and 3.12**. The recorded source revision and raw output are linked below.
+Current local verification: **117 passing pytest cases**. The previously archived 113-test version passed on Python 3.11 and 3.12; the repository badge shows the current CI status. Historical source-scoped logs and the current CI status are linked below.
 
 ```bash
 python -m pytest -q
@@ -85,6 +85,8 @@ python -m ride_matcher.replay evidence/stage3-live/traces.json
 ```
 
 Tests cover the real and synthetic bridge traps, availability, ties, malformed model proposals, provider failures, invalid ETAs, configuration, concurrent API trace IDs and trace export validation. All 20 saved live traces are replayed as regression cases with no provider calls. Replay uses recorded status and ETA inputs; redacted GPS coordinates are replaced with placeholders because coordinates are not ranking inputs.
+
+The browser simulator is compared against the Python graph across 60 scenarios, and public trace excerpts are checked against the original export. [What is implemented and what remains for production](docs/project-readiness.md).
 
 The trace auditor compares native generation model/token fields with root copies, validates finite latency, rejects falsely skipped calls, and independently checks the selected minimum ETA. GitHub Actions runs tests on Python 3.11 and 3.12. [Latest source-scoped verification](docs/verification.md).
 

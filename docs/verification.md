@@ -1,4 +1,12 @@
-# Portfolio verification
+# Verification
+
+## Guided demo update
+
+The expanded public demo was checked with **117 passing pytest cases** locally on Python 3.12. Four new tests cover 60 browser/Python policy parity scenarios, invalid browser inputs, complete static assets and exact preservation of archived prompts/shortlists. All 20 request/trace views passed DOM checks. Cloud-browser checks covered the bridge guide, rejected nearest-car proposal, availability changes, zero and negative ETAs, and the empty eligible set. The [current CI workflow](https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/workflows/tests.yml) verifies the committed version on Python 3.11 and 3.12.
+
+The public page remains a recorded-evidence viewer and browser policy simulator. No new real OpenRouter call or hosted trace upload is claimed. [Remaining production work](project-readiness.md).
+
+## Archived portfolio hardening
 
 The portfolio update was checked with **113 passing pytest cases** on Python 3.12. Tests include all 20 recorded live trace replays, concurrent API trace headers, explicit no-match handling, provider failure fallback, auditor corruption cases and nonzero-shortlist bridge export.
 

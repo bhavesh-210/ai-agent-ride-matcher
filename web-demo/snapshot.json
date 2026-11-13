@@ -4,7 +4,8 @@
     "source_commit": "244444ec0fb5876ef070f1e76ae9abc8f130bccd",
     "request_count": 20,
     "provider_calls": 0,
-    "note": "Precomputed by the tested Python graph. Public page explores recorded results; it does not execute LangGraph, call a model, upload traces, or use live routing."
+    "note": "Precomputed by the tested Python graph. Public page explores recorded results; it does not execute LangGraph, call a model, upload traces, or use live routing.",
+    "default_accepted_extra_pickup_minutes": 0
   },
   "results": {
     "RQ-0303-001": {
@@ -914,5 +915,10 @@
         "verification": "offline_deterministic_demo_no_api_call"
       }
     }
+  },
+  "_evidence": {
+    "stage": "public-recorded-snapshot-results",
+    "commit": "244444ec0fb5876ef070f1e76ae9abc8f130bccd",
+    "commit_role": "original_recorded_source_not_browser_runtime"
   }
 }

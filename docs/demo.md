@@ -37,3 +37,11 @@ This JSON example is a **separate synthetic fixture**, not the 16-versus-4-minut
 ## Record a short project video
 
 Show the bridge comparison, candidate audit, no-match ride, passing tests and saved live trace in that order. Say that the UI uses snapshot estimates and the historical live export is separately versioned. No provider account, key or billing page needs to appear on screen.
+
+## Guided public walkthrough
+
+- Read the three short problem/approach/proof cards.
+- Click each bridge walkthrough step to see which candidate rows it explains.
+- Pick a recorded request. Its trace panel updates to the same request, with actual archived model prompt, shortlisted IDs, token usage, model reason and timings. Download is a curated excerpt; the full original export remains linked.
+- In the separate browser simulator, select **Nearest available car**: the default 16-minute proposal is rejected and the 4-minute driver wins. Try changing availability, entering zero minutes, leaving a route blank, or making all drivers unavailable.
+- Sandbox edits never alter the historical evidence. [Project scope and remaining production work](project-readiness.md).
