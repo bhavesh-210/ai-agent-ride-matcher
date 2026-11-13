@@ -433,6 +433,24 @@
       "metadata": "evidence/portfolio-final/pytest.txt.metadata.json",
       "sha256": "c82a09aab9ac4a64fba20ec1980c95eb9f739690de1cb7b4cebf1fbb4ff8f295",
       "evidence_mode": "offline-verification-plus-public-ci"
+    },
+    {
+      "artifact": "docs/scenario-demo.jpg",
+      "stage": "guided-public-demo",
+      "commit": "1b8553afc7fadb0cda2db6e7e2e5717ab1a8925a",
+      "commit_role": "tested_guided_demo_source",
+      "metadata": "docs/scenario-demo.jpg.metadata.json",
+      "sha256": "14fb536d48d96a78f8c5020f85eb9b3415f6a5e9433f8b48508f0f153d2a5ec1",
+      "evidence_mode": "local-test-or-public-browser-simulation"
+    },
+    {
+      "artifact": "evidence/guided-demo/pytest.txt",
+      "stage": "guided-public-demo",
+      "commit": "1b8553afc7fadb0cda2db6e7e2e5717ab1a8925a",
+      "commit_role": "tested_guided_demo_source",
+      "metadata": "evidence/guided-demo/pytest.txt.metadata.json",
+      "sha256": "cfc0e9b9ae9764e8491bcb89da2db73888f01ca17a6f10536f5ba02b41b34e84",
+      "evidence_mode": "local-test-or-public-browser-simulation"
     }
   ]
 }

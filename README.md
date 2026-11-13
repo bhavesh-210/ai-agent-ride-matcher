@@ -26,7 +26,7 @@ These are results on a small snapshot, **not measured real-world rider wait-time
 
 ## Open the demo
 
-**[Launch the public demo →](https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/)** — no installation, sign-in or API keys. Follow the bridge walkthrough, inspect recorded Python-agent outputs and model traces for all 20 requests, or edit driver statuses and ETAs in a browser policy simulator. The hosted page replays snapshot evidence and runs a clearly labelled browser simulator; it does not execute Python or a live model call. [Demo source](web-demo/README.md).
+**[Launch the public demo →](https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/)** — no installation, sign-in or API keys. Follow the bridge walkthrough, inspect recorded Python-agent outputs and model traces for all 20 requests, or edit driver statuses and ETAs in a browser policy simulator. The hosted page replays snapshot evidence and runs a clearly labelled browser simulator; it does not execute Python or a live model call. [Demo source](web-demo/README.md) · [Scenario screenshot](docs/scenario-demo.jpg).
 
 ## Run the Python agent locally
 
@@ -76,7 +76,7 @@ Every original candidate receives an audit entry, including unavailable drivers 
 
 ## Tests and offline replay
 
-Current local verification: **117 passing pytest cases**. The previously archived 113-test version passed on Python 3.11 and 3.12; the repository badge shows the current CI status. Historical source-scoped logs and the current CI status are linked below.
+Verified in [GitHub Actions](https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/runs/43509181054): **117 passing pytest cases on Python 3.11 and 3.12**. Historical source-scoped logs and the current CI status are linked below.
 
 ```bash
 python -m pytest -q

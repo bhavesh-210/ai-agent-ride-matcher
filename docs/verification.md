@@ -2,7 +2,7 @@
 
 ## Guided demo update
 
-The expanded public demo was checked with **117 passing pytest cases** locally on Python 3.12. Four new tests cover 60 browser/Python policy parity scenarios, invalid browser inputs, complete static assets and exact preservation of archived prompts/shortlists. All 20 request/trace views passed DOM checks. Cloud-browser checks covered the bridge guide, rejected nearest-car proposal, availability changes, zero and negative ETAs, and the empty eligible set. The [current CI workflow](https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/workflows/tests.yml) verifies the committed version on Python 3.11 and 3.12.
+The expanded public demo passed **117 pytest cases on both Python 3.11 and 3.12** in [GitHub Actions](https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/runs/43509181054), from source `1b8553afc7fadb0cda2db6e7e2e5717ab1a8925a`. [Local raw log](../evidence/guided-demo/pytest.txt) · [Source metadata](../evidence/guided-demo/pytest.txt.metadata.json). Four new tests cover 60 browser/Python policy parity scenarios, invalid browser inputs, complete static assets and exact preservation of archived prompts/shortlists. All 20 request/trace views passed DOM checks. Cloud-browser checks covered the bridge guide, rejected nearest-car proposal, availability changes, zero and negative ETAs, and the empty eligible set. The [current CI workflow](https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/workflows/tests.yml) verifies the committed version on Python 3.11 and 3.12.
 
 The public page remains a recorded-evidence viewer and browser policy simulator. No new real OpenRouter call or hosted trace upload is claimed. [Remaining production work](project-readiness.md).
 

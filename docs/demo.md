@@ -45,3 +45,7 @@ Show the bridge comparison, candidate audit, no-match ride, passing tests and sa
 - Pick a recorded request. Its trace panel updates to the same request, with actual archived model prompt, shortlisted IDs, token usage, model reason and timings. Download is a curated excerpt; the full original export remains linked.
 - In the separate browser simulator, select **Nearest available car**: the default 16-minute proposal is rejected and the 4-minute driver wins. Try changing availability, entering zero minutes, leaving a route blank, or making all drivers unavailable.
 - Sandbox edits never alter the historical evidence. [Project scope and remaining production work](project-readiness.md).
+
+![Published browser simulator rejecting the slower proposal](scenario-demo.jpg)
+
+[Source and screenshot metadata](scenario-demo.jpg.metadata.json). This is a browser simulation, not a new live model call.

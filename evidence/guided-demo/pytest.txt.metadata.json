@@ -1,0 +1,17 @@
+{
+  "_evidence": {
+    "stage": "guided-public-demo",
+    "commit": "1b8553afc7fadb0cda2db6e7e2e5717ab1a8925a",
+    "commit_role": "tested_guided_demo_source",
+    "site_source_commit": "9e6782e6636e57262455fec4bd309dbcc7c33955",
+    "provider_mode": "browser_simulation_and_recorded_evidence_only"
+  },
+  "sha256": "cfc0e9b9ae9764e8491bcb89da2db73888f01ca17a6f10536f5ba02b41b34e84",
+  "command": "python -m pytest -q",
+  "result": "117 passed",
+  "ci_url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/runs/43509181054",
+  "ci_python_3_11": "success",
+  "ci_python_3_12": "success",
+  "browser_policy_parity_scenarios": 60,
+  "new_live_provider_calls": 0
+}

@@ -1,0 +1,13 @@
+{
+  "_evidence": {
+    "stage": "guided-public-demo",
+    "commit": "1b8553afc7fadb0cda2db6e7e2e5717ab1a8925a",
+    "commit_role": "tested_guided_demo_source",
+    "site_source_commit": "9e6782e6636e57262455fec4bd309dbcc7c33955",
+    "provider_mode": "browser_simulation_and_recorded_evidence_only"
+  },
+  "sha256": "14fb536d48d96a78f8c5020f85eb9b3415f6a5e9433f8b48508f0f153d2a5ec1",
+  "url": "https://roadwise-bhavesh-demo.scenicboat64.chatgpt.site/",
+  "captured_at_utc": "2026-11-13T21:16:55.257462+00:00",
+  "shows": "Browser simulation rejecting the 16-minute nearest-car proposal and keeping the 4-minute driver; not a live model call."
+}
