@@ -1,0 +1,59 @@
+{
+  "_evidence": {
+    "stage": "portfolio-clean-checkout-verification",
+    "commit": "68fd4c8debcc014093efd4a025633bfd7b4301b0",
+    "commit_role": "tested_source_revision",
+    "provider_mode": "offline_verification_only",
+    "verified_at_utc": "2026-11-13T20:05:09.318780+00:00"
+  },
+  "pytest": {
+    "passed": 113,
+    "failed": 0,
+    "log": "pytest.txt",
+    "python": "3.12.14"
+  },
+  "clean_checkout_files_verified": 36,
+  "ci": {
+    "run_id": 43498001458,
+    "url": "https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/runs/43498001458",
+    "python_3_11": "success",
+    "python_3_12": "success"
+  },
+  "replay": {
+    "mode": "offline_trace_replay",
+    "trace_count": 20,
+    "original_source_commit": "98c5804d18e90484023abf0d79b7f3a16469c40c",
+    "mismatches": []
+  },
+  "benchmark": {
+    "mode": "offline_snapshot_benchmark",
+    "requests": 20,
+    "matched": 19,
+    "no_match": 1,
+    "improved_requests": 7,
+    "nearest_available_total_minutes": 113.0,
+    "matcher_total_minutes": 60.0,
+    "aggregate_eta_reduction_percent": 46.9,
+    "scope": "Supplied routing estimates on this snapshot only; not measured real-world waiting time."
+  },
+  "existing_live_export_audit": {
+    "trace_count": 20,
+    "missing_required_fields": [],
+    "incomplete_model_traces": []
+  },
+  "demo_check": {
+    "api_requests_checked": 20,
+    "dom_results_checked": 20,
+    "script_errors": [],
+    "method": "FastAPI TestClient + jsdom using actual API results",
+    "real_browser_layout_verified": false,
+    "browser_limitation": "Chromium launch blocked by environment socket restrictions"
+  },
+  "supersedes": "../portfolio/verification.json",
+  "initial_ci_failure": {
+    "run_id": 43497745324,
+    "reason": "The demo HTML existed locally but was missing from the first published tree; added in source commit 68fd4c8debcc014093efd4a025633bfd7b4301b0"
+  },
+  "new_live_provider_calls": 0,
+  "original_live_artifacts_modified": false
+}

@@ -1,0 +1,14 @@
+{
+  "_evidence": {
+    "stage": "portfolio-clean-checkout-verification",
+    "commit": "68fd4c8debcc014093efd4a025633bfd7b4301b0",
+    "commit_role": "tested_source_revision",
+    "provider_mode": "offline_verification_only",
+    "verified_at_utc": "2026-11-13T20:05:09.318780+00:00"
+  },
+  "sha256": "c82a09aab9ac4a64fba20ec1980c95eb9f739690de1cb7b4cebf1fbb4ff8f295",
+  "command": "python -m pytest -q",
+  "python": "3.12.14",
+  "source_check": "36 runtime/test/data files materialized after matching their published Git blob SHA-1s",
+  "exit_code": 0
+}

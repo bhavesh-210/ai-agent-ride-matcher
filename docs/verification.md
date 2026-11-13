@@ -16,4 +16,8 @@ DOM interaction was checked with jsdom against actual demo API results. A headle
 
 No new real OpenRouter calls or hosted Langfuse uploads were performed for this update. API trace integration was verified with the real SDK and an in-memory exporter. The separately archived live batch remains tied to its original source commit. The GitHub Actions matrix is configured for Python 3.11 and 3.12; its actual run status is shown by the repository badge.
 
-Tested source: [`98f1726`](https://github.com/bhavesh-210/ai-agent-ride-matcher/commit/98f17269db0f8ba040ed1a5561b8c552250f5418). All 28 Python/config/dependency files checked against the published tree matched. [Fresh verification record](../evidence/portfolio/verification.json) · [Raw pytest output](../evidence/portfolio/pytest.txt) · [Log provenance](../evidence/portfolio/pytest.txt.metadata.json). Archived assignment evidence was not regenerated or edited.
+Tested source: [`68fd4c8`](https://github.com/bhavesh-210/ai-agent-ride-matcher/commit/68fd4c8debcc014093efd4a025633bfd7b4301b0). All **36 runtime, test, config and data files** in a separate clean test directory matched their published blob hashes. [Fresh verification record](../evidence/portfolio-final/verification.json) · [Raw pytest output](../evidence/portfolio-final/pytest.txt) · [Log provenance](../evidence/portfolio-final/pytest.txt.metadata.json).
+
+[GitHub Actions run](https://github.com/bhavesh-210/ai-agent-ride-matcher/actions/runs/43498001458): **113 tests passed on both Python 3.11 and 3.12**; both snapshot benchmark jobs passed.
+
+The initial local-only record at source `98f1726` is superseded: CI caught an omitted demo HTML asset in the first published tree. That asset was added before the clean-checkout verification. The first failing CI run and the correction are retained in history. Original assignment/live evidence was not edited.
