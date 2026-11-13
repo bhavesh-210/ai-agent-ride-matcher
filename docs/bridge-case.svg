@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="570" viewBox="0 0 1200 570" role="img" aria-labelledby="title desc">
+<title id="title">The nearest car is not always the fastest</title><desc id="desc">A 1.03 kilometre car takes 16 minutes due to a one-way bridge detour. A 1.14 kilometre car takes 4 minutes and is selected. Supplied snapshot routing estimates, not live travel times.</desc>
+<defs><pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M 38 0 H 0 V 38" fill="none" stroke="#dce3d8" stroke-width="1"/></pattern><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#266647" stroke-width="1.5"/></marker></defs>
+<rect width="1200" height="570" rx="20" fill="#f5f7f0"/>
+<text x="42" y="49" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#546a5a">ROADWISE / THE BRIDGE CASE</text>
+<text x="42" y="102" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#17372a">Pick the arrival time. Explain the choice.</text>
+<text x="42" y="134" font-family="Arial,sans-serif" font-size="16" fill="#657365">RQ-0303-002 · Snapshot routing estimates · 0 extra pickup minutes allowed</text>
+<rect x="40" y="167" width="655" height="329" rx="15" fill="url(#grid)"/>
+<path d="M350 167 C300 265 390 343 337 496 L420 496 C462 361 373 272 439 167 Z" fill="#c7e1e0"/>
+<path d="M160 276 L160 211 L522 211 L522 417 L287 417" stroke="#b67a51" stroke-width="7" fill="none" stroke-dasharray="10 7" stroke-linejoin="round"/>
+<path d="M154 439 L154 350 L287 350 L287 417" stroke="#266647" stroke-width="8" fill="none" stroke-linejoin="round"/>
+<rect x="340" y="199" width="103" height="23" rx="4" fill="#a8b4a5"/>
+<text x="347" y="192" font-family="Arial,sans-serif" font-size="12" fill="#637268">Bridge crossing</text>
+<circle cx="160" cy="276" r="13" fill="#b67a51" stroke="#fff" stroke-width="4"/>
+<circle cx="154" cy="439" r="13" fill="#266647" stroke="#fff" stroke-width="4"/>
+<circle cx="287" cy="417" r="14" fill="#17372a" stroke="#fff" stroke-width="4"/>
+<text x="182" y="272" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#8a5737">Closer car</text>
+<text x="181" y="292" font-family="Arial,sans-serif" font-size="12" fill="#657365">16 min road ETA</text>
+<text x="62" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#266647">Fastest car · 4 min</text>
+<text x="305" y="448" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#17372a">Rider pickup</text>
+<rect x="723" y="167" width="433" height="148" rx="14" fill="#fff" stroke="#dce3d8"/>
+<text x="749" y="198" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#8a5737">EXCLUDED / BRIDGE DETOUR</text>
+<text x="749" y="234" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#17372a">DRV-52907</text>
+<text x="1125" y="238" text-anchor="end" font-family="Arial,sans-serif" font-size="31" font-weight="700" fill="#8a5737">16 min</text>
+<text x="749" y="266" font-family="Arial,sans-serif" font-size="14" fill="#657365">1.03 km away on the map</text>
+<text x="749" y="290" font-family="Arial,sans-serif" font-size="13" fill="#657365">Ramp access requires a Burnside Bridge detour.</text>
+<rect x="723" y="334" width="433" height="162" rx="14" fill="#17372a"/>
+<text x="749" y="367" font-family="Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1" fill="#dfed9a">SELECTED / LOWEST ROAD ETA</text>
+<text x="749" y="407" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#fff">DRV-16643</text>
+<text x="1125" y="411" text-anchor="end" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#dfed9a">4 min</text>
+<text x="749" y="445" font-family="Arial,sans-serif" font-size="14" fill="#c2d3c4">1.14 km away · 12 minutes faster</text>
+<text x="749" y="473" font-family="Arial,sans-serif" font-size="13" fill="#c2d3c4">Available, routable, independently verified.</text>
+<text x="42" y="538" font-family="Arial,sans-serif" font-size="12" fill="#657365">Illustrative route schematic, not a geographic map. Match decisions use the supplied road ETAs.</text>
+</svg>

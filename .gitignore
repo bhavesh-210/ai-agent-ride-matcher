@@ -8,3 +8,7 @@ __pycache__/
 .DS_Store
 # Live output needs review before publication; source assignment publication is authorized.
 evidence/live*.json
+runs/
+*.egg-info/
+build/
+dist/

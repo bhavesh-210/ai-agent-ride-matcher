@@ -153,3 +153,20 @@ def test_generation_records_exact_openrouter_messages(tracing, monkeypatch):
     assert root['output']['latency_ms']>=0
     assert 'error' in root['output'] and root['output']['error'] is None
     assert json.loads(generation['attributes']['langfuse.observation.usage_details'])=={'input':100,'output':20,'total':120}
+
+
+def test_batch_refuses_to_overwrite_archived_evidence_before_any_calls(tmp_path):
+    (tmp_path/'traces.json').write_text('preserve-this')
+    with pytest.raises(FileExistsError, match='archived'):
+        run_batch(destination='local', provider_mode='offline', source_commit='b'*40, output_dir=tmp_path)
+    assert (tmp_path/'traces.json').read_text() == 'preserve-this'
+
+
+def test_bridge_export_remains_valid_with_wider_configured_shortlist(tmp_path, monkeypatch):
+    monkeypatch.setenv('ACCEPTED_EXTRA_PICKUP_MINUTES', '20')
+    summary = run_batch(destination='local', provider_mode='offline', source_commit='b'*40, output_dir=tmp_path)
+    assert summary['bridge_check'] == 'passed'
+    bridge = json.loads((tmp_path/'bridge-trace.json').read_text())
+    assert bridge['output']['selected_driver_id'] == 'DRV-16643'
+    slower = next(a for a in bridge['output']['evaluated_candidates'] if a['driver_id'] == 'DRV-52907')
+    assert slower['outcome'] == 'not_selected'

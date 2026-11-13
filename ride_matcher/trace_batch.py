@@ -87,7 +87,9 @@ def check_bridge(export):
     out=bridge["output"]
     assert out["selected_driver_id"]=="DRV-16643" and out["estimated_pickup_time_minutes"]==4
     audits={r["driver_id"]:r for r in out["evaluated_candidates"]}
-    assert audits["DRV-52907"]["road_eta_minutes"]==16 and audits["DRV-52907"]["outcome"]=="excluded"
+    assert audits["DRV-52907"]["road_eta_minutes"]==16
+    expected_outcome = "excluded" if out["accepted_extra_pickup_minutes"] < 12 else "not_selected"
+    assert audits["DRV-52907"]["outcome"] == expected_outcome
     assert "Burnside Bridge" in audits["DRV-52907"]["reason"]
     assert audits["DRV-16643"]["outcome"]=="selected"
     assert "distance" in out["decision_rationale"].lower()
@@ -95,6 +97,10 @@ def check_bridge(export):
 
 
 def run_batch(*, destination, provider_mode, source_commit, output_dir, session_id=None):
+    output = Path(output_dir)
+    if any((output / name).exists() for name in
+           ("traces.json", "bridge-trace.json", "field-audit.json", "summary.json")):
+        raise FileExistsError("Use a new output directory; archived trace evidence must not be overwritten")
     config=MatchingConfig.from_env()
     paths={"requests":Path('data/source/requests.csv'),"drivers":Path('data/source/drivers.csv')}
     hashes={name:hashlib.sha256(path.read_bytes()).hexdigest() for name,path in paths.items()}
@@ -157,10 +163,8 @@ def main():
     parser.add_argument('--destination',choices=['langfuse','local'],default='langfuse')
     parser.add_argument('--provider-mode',choices=['offline','openrouter'],required=True)
     parser.add_argument('--source-commit',required=True)
-    parser.add_argument('--output-dir',default='evidence/stage3-hosted')
+    parser.add_argument('--output-dir',default='runs/traces-'+uuid4().hex)
     args=parser.parse_args()
-    if args.destination=='local' and args.output_dir=='evidence/stage3-hosted':
-        parser.error('Local exports require an explicit output directory separate from hosted evidence')
     summary=run_batch(destination=args.destination,provider_mode=args.provider_mode,
                       source_commit=args.source_commit,output_dir=args.output_dir)
     print(json.dumps(summary,indent=2))

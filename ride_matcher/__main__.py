@@ -19,10 +19,12 @@ def main():
     parser.add_argument("--request-id", default="bridge-001")
     parser.add_argument("--offline", action="store_true", help="Explicit demo; makes NO OpenRouter call")
     parser.add_argument("--list-models", action="store_true")
-    parser.add_argument("--output", default="evidence/run.json")
+    parser.add_argument("--output", default="runs/ride-"+uuid4().hex+".json")
     parser.add_argument("--trace", action="store_true", help="Require a hosted Langfuse trace")
     parser.add_argument("--source-commit", help="Full revision SHA for trace provenance")
     args = parser.parse_args()
+    if Path(args.output).exists():
+        parser.error("Choose a new output path; archived evidence must not be overwritten")
     if args.list_models:
         print("\n".join(list_free_models()))
         return

@@ -28,8 +28,23 @@ def evaluate(requests_path='data/source/requests.csv', drivers_path='data/source
         'dataset_warnings': dataset_warnings(requests, drivers), 'requests': records}
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', help='Optional new JSON path; existing files are never overwritten')
+    parser.add_argument('--source-commit', help='Full tested source SHA; required with --output')
+    args = parser.parse_args()
+    if args.output:
+        import re
+        if not re.fullmatch(r'[0-9a-f]{40}', args.source_commit or ''):
+            parser.error('--output requires a full --source-commit for provenance')
+        if Path(args.output).exists():
+            parser.error('Choose a new output path; archived evidence must not be overwritten')
     report = evaluate()
-    path = Path('evidence/assignment-evaluation.json')
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(report, indent=2) + '\n')
+    if args.output:
+        report['_evidence'] = {'stage': 'offline-evaluation', 'commit': args.source_commit,
+                               'provider_mode': 'offline'}
+        path = Path(args.output)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open('x') as file:
+            file.write(json.dumps(report, indent=2) + '\n')
     print(json.dumps({k:v for k,v in report.items() if k != 'requests'}, indent=2))

@@ -1,6 +1,7 @@
 """Langfuse SDK observations; local exports are never called hosted traces."""
 from contextlib import contextmanager, nullcontext
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from contextvars import ContextVar
 import os
 import re
 from uuid import uuid4
@@ -53,6 +54,8 @@ class RideTracer:
     session_id: str
     provider_mode: str
     input_hashes: dict
+    current_trace_id: ContextVar = field(default_factory=lambda: ContextVar("ride_trace_id", default=None),
+                                       init=False, repr=False)
 
     def __post_init__(self):
         if not re.fullmatch(r"[0-9a-f]{40}", self.source_commit):
@@ -109,6 +112,7 @@ class RideTracer:
                                   input={"request_id": state.request.request_id,
                                          "candidates": [candidate_input(d) for d in state.all_candidates]}) as root:
                     self.trace_ids.append({"request_id":state.request.request_id, "trace_id":root.trace_id})
+                    self.current_trace_id.set(root.trace_id)
                     yield root
         finally:
             context.detach(token)
